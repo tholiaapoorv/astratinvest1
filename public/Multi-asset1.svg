@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="76" height="74" viewBox="0 0 76 74" fill="none">
+  <mask id="path-1-inside-1_5843_44119" fill="white">
+    <rect x="17" y="11" width="20" height="20" rx="1"></rect>
+  </mask>
+  <rect x="17" y="11" width="20" height="20" rx="1" stroke="#3D58E5" stroke-width="3" mask="url(#path-1-inside-1_5843_44119)"></rect>
+  <path d="M51.2184 22.9321L61.6404 41.6283C61.7333 41.7949 61.6128 42 61.422 42H40.578C40.3872 42 40.2667 41.7949 40.3596 41.6283L50.7816 22.9321C50.877 22.761 51.123 22.761 51.2184 22.9321Z" stroke="#3D58E5" stroke-width="1.5"></path>
+  <circle cx="28" cy="52" r="10.25" stroke="#3D58E5" stroke-width="1.5"></circle>
+</svg>
