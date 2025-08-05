@@ -89,23 +89,21 @@ const InvestorRelationsPage = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="px-4 py-2 border">May 2025</td>
-                  <td className="px-4 py-2 border">0</td>
-                  <td className="px-4 py-2 border">0</td>
-                  <td className="px-4 py-2 border">0</td>
-                  <td className="px-4 py-2 border">0</td>
-                  <td className="px-4 py-2 border">–</td>
-                </tr>
-                <tr>
-                  <td className="px-4 py-2 border">June 2025</td>
-                  <td className="px-4 py-2 border">0</td>
-                  <td className="px-4 py-2 border">0</td>
-                  <td className="px-4 py-2 border">0</td>
-                  <td className="px-4 py-2 border">0</td>
-                  <td className="px-4 py-2 border">–</td>
-                </tr>
-              </tbody>
+  {[
+    { month: "May 2025" },
+    { month: "June 2025" },
+    { month: "July 2025" },
+  ].map(({ month }) => (
+    <tr key={month}>
+      <td className="px-4 py-2 border">{month}</td>
+      <td className="px-4 py-2 border">0</td>
+      <td className="px-4 py-2 border">0</td>
+      <td className="px-4 py-2 border">0</td>
+      <td className="px-4 py-2 border">0</td>
+      <td className="px-4 py-2 border">–</td>
+    </tr>
+  ))}
+</tbody>
             </table>
           </div>
         </section>
