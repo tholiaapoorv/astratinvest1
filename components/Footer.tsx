@@ -128,17 +128,6 @@ const Footer = () => {
           <span className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
             © 2024 <a href="https://astratinvest.com/" className="hover:underline">Astratinvest™</a>. All Rights Reserved.
           </span>
-          <span className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
-            Charts are powered by{" "}
-            <a
-              href="https://www.tradingview.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline text-[#3959E5]"
-            >
-              TradingView
-            </a>.
-          </span>
         </div>
       </div>
     </footer>
