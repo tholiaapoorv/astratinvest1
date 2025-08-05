@@ -237,6 +237,18 @@ const Page = () => {
         </div>
       </div>
     </motion.div>
+    {/* 👇 Powered by TradingView note added here */}
+      <div className="mt-4 mb-8 text-center text-sm font-light text-gray-500">
+        Data insights powered by{" "}
+        <a
+          href="https://www.tradingview.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-[#3959E6] underline"
+        >
+          TradingView
+        </a>
+      </div>
   );
 };
 
