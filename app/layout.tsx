@@ -12,6 +12,7 @@ const ivy = localFonts({
   variable: "--ivy",
 });
 
+
 const ivy_thin = localFonts({
   src: [{ path: "../fonts/IvyMode-ThinItalic.ttf" }],
   variable: "--ivy-thin",
