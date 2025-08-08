@@ -1,16 +1,15 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-/*import Confetti from "react-confetti";*/
+// import Confetti from "react-confetti";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import z from "zod";
 import { Listbox } from "@headlessui/react";
 
-
 const AIFForm = () => {
   const recaptcha = useRef<ReCAPTCHA>(null);
-  /*const [confetti, showConfetti] = useState(false);*/
+  // const [confetti, showConfetti] = useState(false);
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -46,7 +45,7 @@ const AIFForm = () => {
   });
 
   useEffect(() => {
-    showConfetti(false);
+    // showConfetti(false);
     setIsSubmitting(false);
   }, []);
 
@@ -54,10 +53,8 @@ const AIFForm = () => {
     <div className="h-full w-full">
       <section className="relative flex min-h-screen items-center justify-center bg-[#000121] text-white">
         <div className="flex flex-col items-center justify-center px-4 py-4 phone:w-[95%] lg:py-12 smLaptop:w-[80%]">
-          /*
-          {/* Confetti */}
-          {confetti && <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} />}
-          */
+          {/* Confetti removed */}
+
           {/* Heading */}
           <h2 className="mb-4 text-center font-ivy text-[min(5vh,5vw)] font-extrabold tracking-wide text-white">
             Register Interest in AIF
@@ -101,7 +98,7 @@ const AIFForm = () => {
                 mode: "no-cors",
                 body: JSON.stringify(parsed.data),
               });
-              //showConfetti(true);
+              // showConfetti(true);
               recaptcha.current?.reset();
               toast.success("Submitted successfully! We’ll be in touch soon.");
               setIsSubmitting(false);
@@ -142,7 +139,6 @@ const AIFForm = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              //onClick={() => showConfetti(false)}
               className="flex w-full items-center justify-center rounded-lg bg-[#3959E6] p-4 text-white font-medium hover:bg-[#2d45b5]"
             >
               {isSubmitting ? <Loader2 className="animate-spin w-5 h-5" /> : "Submit"}
@@ -169,9 +165,7 @@ const Dropdown = ({ label, options, selected, setSelected }: any) => (
               key={idx}
               value={option}
               className={({ active }) =>
-                `cursor-pointer select-none py-2 px-4 ${
-                  active ? "bg-[#3959E6] text-white" : "text-white"
-                }`
+                `cursor-pointer select-none py-2 px-4 ${active ? "bg-[#3959E6] text-white" : "text-white"}`
               }
             >
               {option}
