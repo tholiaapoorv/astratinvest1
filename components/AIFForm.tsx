@@ -5,20 +5,15 @@ import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import z from "zod";
 
-// --- Move static data OUTSIDE the component to avoid recreations ---
 const ACCOUNT_OPTIONS = [
-  "Resident Indian", "NRI", "Proprietorship", "HUF", "LLP - Partnership",
-  "Company & BD Corp", "Societies", "Trust", "AOP or BOI",
-  "Bank-Registered Entities", "NRI Entity", "Investor through POA",
+  "Resident Indian","NRI","Proprietorship","HUF","LLP - Partnership",
+  "Company & BD Corp","Societies","Trust","AOP or BOI",
+  "Bank-Registered Entities","NRI Entity","Investor through POA",
 ] as const;
-
 const CONTACT_OPTIONS = ["Call with the team", "Deck on Email"] as const;
-
 const REFERRAL_OPTIONS = ["Website", "Referral", "TV", "Podcast", "LinkedIn", "Twitter", "Other"] as const;
 
-// --- Validation (fast + precise) ---
 const indianPhonePattern = /^(?:\+?91[-\s]?)?[6-9]\d{9}$/;
-
 const formSchema = z.object({
   first_name: z.string().trim().min(1, "First name is required").max(100),
   last_name: z.string().trim().min(1, "Last name is required").max(100),
@@ -34,10 +29,9 @@ const formSchema = z.object({
   consent3: z.literal(true, { errorMap: () => ({ message: "Self-initiated info confirmation is required" }) }),
 });
 
-const AIFForm = () => {
+export default function AIFForm() {
   const recaptcha = useRef<ReCAPTCHA>(null);
 
-  // Uncontrolled text inputs via refs = fewer re-renders than controlled fields
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -46,13 +40,11 @@ const AIFForm = () => {
   const consent2Ref = useRef<HTMLInputElement>(null);
   const consent3Ref = useRef<HTMLInputElement>(null);
 
-  // Keep only the small, necessary state
   const [accountType, setAccountType] = useState<string>("");
   const [contactMethod, setContactMethod] = useState<string>("");
   const [referralSource, setReferralSource] = useState<string>("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Memoize action URL so React doesn’t think it changed every render
   const actionUrl = useMemo(
     () =>
       "https://script.google.com/macros/s/AKfycbyAOmzg8JjOeqIQlcXbuPMotwbjE4YM3KI8k5NJwu0iplaJeMlmbxLZ_MbiKq5I4loz/exec",
@@ -66,13 +58,7 @@ const AIFForm = () => {
     try {
       setIsSubmitting(true);
 
-      const captchaValue = recaptcha.current?.getValue();
-      if (!captchaValue) {
-        toast.error("Please verify the reCAPTCHA");
-        setIsSubmitting(false);
-        return;
-      }
-
+      // Validate first to avoid unnecessary recaptcha work
       const parsed = formSchema.safeParse({
         first_name: firstNameRef.current?.value ?? "",
         last_name: lastNameRef.current?.value ?? "",
@@ -85,16 +71,22 @@ const AIFForm = () => {
         consent2: Boolean(consent2Ref.current?.checked),
         consent3: Boolean(consent3Ref.current?.checked),
       });
-
       if (!parsed.success) {
-        // Show first error to avoid a cascade of toasts (faster UX)
         toast.error(parsed.error.errors[0]?.message ?? "Please check the form");
-        recaptcha.current?.reset();
         setIsSubmitting(false);
         return;
       }
 
-      // Fire-and-forget to Apps Script (no-cors means we can’t read the response)
+      // Invisible reCAPTCHA only runs on submit
+      const token = await recaptcha.current?.executeAsync();
+      recaptcha.current?.reset();
+      if (!token) {
+        toast.error("reCAPTCHA failed; please try again.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Send to Apps Script
       await fetch(actionUrl, {
         method: "POST",
         mode: "no-cors",
@@ -102,13 +94,10 @@ const AIFForm = () => {
         body: JSON.stringify(parsed.data),
       });
 
-      // Reset UI quickly
       (e.target as HTMLFormElement).reset();
       setAccountType("");
       setContactMethod("");
       setReferralSource("");
-      recaptcha.current?.reset();
-
       toast.success("Submitted successfully! We’ll be in touch soon.");
     } catch {
       toast.error("Something went wrong. Please try again.");
@@ -118,19 +107,20 @@ const AIFForm = () => {
   }, [accountType, contactMethod, referralSource, actionUrl, isSubmitting]);
 
   return (
-    <div className="h-full w-full">
-      <section className="relative flex min-h-screen items-center justify-center bg-[#000121] text-white">
-        <div className="flex flex-col items-center justify-center px-4 py-4 phone:w-[95%] lg:py-12 smLaptop:w-[80%]">
-          <h2 className="mb-4 text-center font-ivy text-[min(5vh,5vw)] font-extrabold tracking-wide">
+    <div className="w-full bg-[#000121] text-white">
+      {/* Avoid min-h-screen on phones; it causes viewport thrash with keyboard */}
+      <section className="relative flex items-center justify-center py-10 sm:min-h-screen">
+        <div className="flex w-full max-w-3xl flex-col items-center px-4">
+          {/* Replace vh/vw text sizes with responsive Tailwind sizes */}
+          <h2 className="mb-3 text-center font-ivy text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-wide">
             Register Interest in AIF
           </h2>
-          <p className="mb-8 text-center font-poppins text-white/60 phone:text-[min(3.5vw,3.5vh)] sm:text-[min(2.5vw,2.5vh)] smLaptop:mb-12">
+          <p className="mb-8 text-center font-poppins text-sm sm:text-base text-white/70">
             Share your details and our team will get in touch within{" "}
             <span className="text-[#3959E6]">3 working days</span>.
           </p>
 
           <form onSubmit={onSubmit} className="w-full space-y-6 font-poppins">
-            {/* Names */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <input
                 ref={firstNameRef}
@@ -148,7 +138,6 @@ const AIFForm = () => {
               />
             </div>
 
-            {/* Email / Phone */}
             <input
               ref={emailRef}
               required
@@ -169,7 +158,7 @@ const AIFForm = () => {
               autoComplete="tel"
             />
 
-            {/* Dropdowns (native <select> = faster + scrollable everywhere) */}
+            {/* Native selects = buttery smooth scroll */}
             <Select
               label="Account Type*"
               value={accountType}
@@ -208,9 +197,13 @@ const AIFForm = () => {
               </label>
             </div>
 
-            <ReCAPTCHA ref={recaptcha} sitekey={process.env.NEXT_PUBLIC_SITE_KEY as string} />
+            {/* Invisible reCAPTCHA */}
+            <ReCAPTCHA
+              ref={recaptcha}
+              size="invisible"
+              sitekey={process.env.NEXT_PUBLIC_SITE_KEY as string}
+            />
 
-            {/* Submit */}
             <button
               type="submit"
               disabled={isSubmitting}
@@ -223,9 +216,8 @@ const AIFForm = () => {
       </section>
     </div>
   );
-};
+}
 
-// Minimal, styled native select with perfect scrolling perf
 function Select<T extends readonly string[]>({
   label,
   value,
@@ -258,11 +250,8 @@ function Select<T extends readonly string[]>({
             </option>
           ))}
         </select>
-        {/* Chevron */}
         <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">▾</span>
       </div>
     </div>
   );
 }
-
-export default AIFForm;
