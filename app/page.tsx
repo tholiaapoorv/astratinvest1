@@ -111,15 +111,7 @@ export default function Home() {
         <HomePageStats />
         <SplineScene />
         <JimSimons />
-        <FeaturedOn
-          title="We’ve been featured in"
-          subtitle="Coverage from leading business publications"
-          logos={DEFAULT_FEATURED_LOGOS}
-          className="bg-gray-50"
-          />
-
-<Testimonials />
-
+        <FeaturedOn className="bg-gray-50"/>
         <Testimonials />
         <Blogs />
         <AIFForm />
