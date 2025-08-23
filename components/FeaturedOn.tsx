@@ -100,10 +100,9 @@ export default function FeaturedOn({
 // You can import this component and pass the logos array from your page.
 // Example logos array (place matching files under /public/logos/*):
 export const DEFAULT_FEATURED_LOGOS: FeaturedLogo[] = [
-  { name: "Mint", src: "/logos/mint.svg" },
-  { name: "The Economic Times", src: "/logos/economic-times.svg" },
-  { name: "ET Now", src: "/logos/et-now.svg" },
-  { name: "Moneycontrol", src: "/logos/moneycontrol.svg" },
-  { name: "Bloomberg", src: "/logos/bloomberg.svg" },
-  { name: "CNBC TV18", src: "/logos/cnbc-tv18.svg" },
+  { name: "The Economic Times", src: "/logos/et times.png" },
+  { name: "Entrepreneur India", src: "/logos/Ent logo.svg" },
+  { name: "Entracker", src: "/logos/entracker.png" },
+  { name: "Business Today", src: "/logos/businesstoday.webp" },
+  { name: "News 18", src: "/logos/News18.png" },
 ];
