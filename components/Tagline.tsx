@@ -62,7 +62,7 @@ const Tagline = () => {
       <div className="tagline-wrapper flex h-full w-[80%] flex-col justify-center text-start phone:items-center phone:gap-6 smTablet:items-center smTablet:gap-10 smLaptop:gap-6">
         <p className="tagline-word overflow-hidden font-poppins text-white/90 phone:text-[min(5vh,5vw)] smTablet:text-[min(3.5vw,3.5vh)] smLaptop:text-[min(6vh,6vw)] laptop:text-[min(5vh,5vw)]">
           <span className="mx-2 font-ivy_thin_italic text-[#e7aeff]">
-            AStratinvest
+            Astratinvest
           </span>
           aims for superior
           <span className="mx-2 font-ivy_thin_italic text-[#e7aeff]">
