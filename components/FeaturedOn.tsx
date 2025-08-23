@@ -58,11 +58,12 @@ export default function FeaturedOn({
         {/* Dynamic auto-fit grid */}
         <ul
           aria-label="Media logos"
-          className="grid gap-x-8 gap-y-10 items-center justify-items-center"
+          className="grid gap-x-10 gap-y-12 items-center justify-items-center px-4 sm:px-8" 
           style={{
             gridTemplateColumns: `repeat(auto-fit, minmax(${minItemWidth}px, 1fr))`,
           }}
-        >
+          >
+
           {logos.map((logo) => {
             const content = (
               <>
