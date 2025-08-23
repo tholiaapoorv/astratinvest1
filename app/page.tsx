@@ -111,7 +111,6 @@ export default function Home() {
         <HomePageStats />
         <SplineScene />
         <JimSimons />
-        <JimSimons />
         <FeaturedOn
           title="We’ve been featured in"
           subtitle="Coverage from leading business publications"
