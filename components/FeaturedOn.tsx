@@ -16,31 +16,36 @@ interface FeaturedOnProps {
   subtitle?: string;
   logos?: FeaturedLogo[]; // optional; falls back to defaults
   className?: string;
-  /** Minimum width for each logo cell in px (used by auto-fit). */
-  minItemWidth?: number;  // e.g., 140–220 works well
 }
 
 // 🔹 Default logos baked into the component
 export const DEFAULT_FEATURED_LOGOS: FeaturedLogo[] = [
-  { name: "The Economic Times",  src: "/logos/Economic-times.png",       width: 200, height: 60 },
-  { name: "Entrepreneur India",  src: "/logos/Entrepreneur-India.png",        width: 200, height: 60 },
-  { name: "Entracker",           src: "/logos/Entracker.png",       width: 200, height: 60 },
-  { name: "Business Today",      src: "/logos/Business-today.png",  width: 200, height: 60 },
-  { name: "ET Edge",             src: "/logos/ET-Edge.png",  width: 200, height: 60 },
-  { name: "News 18",             src: "/logos/News18.png",          width: 200, height: 60 },
+  { name: "The Economic Times",  src: "/logos/Economic-times.png",   width: 200, height: 60 },
+  { name: "Entrepreneur India",  src: "/logos/Entrepreneur-India.png", width: 200, height: 60 },
+  { name: "Entracker",           src: "/logos/Entracker.png",        width: 200, height: 60 },
+  { name: "Business Today",      src: "/logos/Business-today.png",   width: 200, height: 60 },
+  { name: "ET Edge",             src: "/logos/ET-Edge.png",          width: 200, height: 60 },
+  { name: "News 18",             src: "/logos/News18.png",           width: 200, height: 60 },
 ];
 
+/**
+ * Responsive, accessible "Featured on" section.
+ * - Uses Next/Image for optimization
+ * - Balanced grid: 2 cols (mobile), 3 cols (sm+)
+ * - If last row has 2 items on a 3-col grid, they're centered
+ * - No hover effects; logos always full color
+ * - `font-ivy` applied to the whole section
+ */
 export default function FeaturedOn({
   title = "Featured on",
   subtitle = "Coverage from leading business publications",
   logos = DEFAULT_FEATURED_LOGOS,
   className = "",
-  minItemWidth = 160,  // tweak if you want bigger/smaller cells
 }: FeaturedOnProps) {
   return (
     <section
       aria-labelledby="featured-on-heading"
-      className={`w-full py-16 md:py-20 bg-white ${className}`}
+      className={`w-full py-16 md:py-20 bg-white font-ivy ${className}`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10">
@@ -55,15 +60,18 @@ export default function FeaturedOn({
           ) : null}
         </div>
 
-        {/* Dynamic auto-fit grid */}
+        {/* Balanced grid: 2 cols on mobile, 3 cols from sm+.
+            The arbitrary selector centers a 2-item last row on 3-col grids. */}
         <ul
           aria-label="Media logos"
-          className="grid gap-x-10 gap-y-12 items-center justify-items-center px-4 sm:px-8" 
-          style={{
-            gridTemplateColumns: `repeat(auto-fit, minmax(${minItemWidth}px, 1fr))`,
-          }}
-          >
-
+          className="
+            grid grid-cols-2 sm:grid-cols-3
+            gap-x-10 gap-y-12
+            items-center justify-items-center
+            px-4 sm:px-8
+            sm:[&>li:nth-last-child(2):nth-child(3n+1)]:[grid-column:2]
+          "
+        >
           {logos.map((logo) => {
             const content = (
               <>
@@ -72,14 +80,14 @@ export default function FeaturedOn({
                   alt={logo.name}
                   width={logo.width ?? 200}
                   height={logo.height ?? 60}
-                  className="h-10 w-auto object-contain filter grayscale opacity-70 transition-all duration-300 group-hover:grayscale-0 group-hover:opacity-100"
+                  className="h-10 w-auto object-contain"
                 />
                 <span className="sr-only">{logo.name}</span>
               </>
             );
 
             return (
-              <li key={logo.name} className="group">
+              <li key={logo.name} className="p-4">
                 {logo.href ? (
                   <a
                     href={logo.href}
