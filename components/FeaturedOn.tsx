@@ -5,30 +5,37 @@ import React from "react";
 
 export type FeaturedLogo = {
   name: string;
-  src: string; // path under /public or a remote URL allowed by next.config
-  href?: string; // optional outbound link
-  width?: number; // optional intrinsic width hint (improves CLS)
-  height?: number; // optional intrinsic height hint
+  src: string;      // path under /public or a remote URL allowed by next.config
+  href?: string;    // optional outbound link
+  width?: number;   // intrinsic size hints to improve CLS
+  height?: number;
 };
 
 interface FeaturedOnProps {
   title?: string;
   subtitle?: string;
-  logos: FeaturedLogo[];
+  logos?: FeaturedLogo[]; // optional; falls back to defaults
   className?: string;
+  /** Minimum width for each logo cell in px (used by auto-fit). */
+  minItemWidth?: number;  // e.g., 140–220 works well
 }
 
-/**
- * Responsive, accessible "Featured on" section.
- * - Uses Next/Image for optimization
- * - Logos are shown in grayscale by default; color on hover
- * - Keyboard & screen‑reader friendly (links are focusable with visible ring)
- */
+// 🔹 Default logos baked into the component
+export const DEFAULT_FEATURED_LOGOS: FeaturedLogo[] = [
+  { name: "The Economic Times",  src: "/logos/et times.png",       width: 200, height: 60 },
+  { name: "Entrepreneur India",  src: "/logos/Ent logo.svg",        width: 200, height: 60 },
+  { name: "Entracker",           src: "/logos/entracker.png",       width: 200, height: 60 },
+  { name: "Business Today",      src: "/logos/businesstoday.webp",  width: 200, height: 60 },
+  { name: "ET Edge",             src: "/logos/Et Edge.png",  width: 200, height: 60 },
+  { name: "News 18",             src: "/logos/News18.png",          width: 200, height: 60 },
+];
+
 export default function FeaturedOn({
   title = "Featured on",
-  subtitle,
-  logos,
+  subtitle = "Coverage from leading business publications",
+  logos = DEFAULT_FEATURED_LOGOS,
   className = "",
+  minItemWidth = 160,  // tweak if you want bigger/smaller cells
 }: FeaturedOnProps) {
   return (
     <section
@@ -48,7 +55,14 @@ export default function FeaturedOn({
           ) : null}
         </div>
 
-        <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-x-8 gap-y-10 items-center justify-items-center">
+        {/* Dynamic auto-fit grid */}
+        <ul
+          aria-label="Media logos"
+          className="grid gap-x-8 gap-y-10 items-center justify-items-center"
+          style={{
+            gridTemplateColumns: `repeat(auto-fit, minmax(${minItemWidth}px, 1fr))`,
+          }}
+        >
           {logos.map((logo) => {
             const content = (
               <>
@@ -76,14 +90,16 @@ export default function FeaturedOn({
                     {content}
                   </a>
                 ) : (
-                  <div aria-label={logo.name} className="p-2">{content}</div>
+                  <div aria-label={logo.name} className="p-2">
+                    {content}
+                  </div>
                 )}
               </li>
             );
           })}
         </ul>
 
-        {/* subtle divider wave effect (optional) */}
+        {/* subtle divider */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -95,14 +111,3 @@ export default function FeaturedOn({
     </section>
   );
 }
-
-// ---------- Example usage (remove if you pass your own props) ----------
-// You can import this component and pass the logos array from your page.
-// Example logos array (place matching files under /public/logos/*):
-export const DEFAULT_FEATURED_LOGOS: FeaturedLogo[] = [
-  { name: "The Economic Times", src: "/logos/et times.png" },
-  { name: "Entrepreneur India", src: "/logos/Ent logo.svg" },
-  { name: "Entracker", src: "/logos/entracker.png" },
-  { name: "Business Today", src: "/logos/businesstoday.webp" },
-  { name: "News 18", src: "/logos/News18.png" },
-];
