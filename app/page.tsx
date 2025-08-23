@@ -12,6 +12,7 @@ import Tagline from "@/components/Tagline";
 import HomePageStats from "@/components/HomePageStats";
 import SplineScene from "@/components/SplineScene";
 import JimSimons from "@/components/JimSimons";
+import FeaturedOn, { DEFAULT_FEATURED_LOGOS } from "@/components/FeaturedOn";
 import Footer from "@/components/Footer";
 import AIFForm from "@/components/AIFForm";
 import { Testimonials } from "@/components/Testimonials";
@@ -110,6 +111,16 @@ export default function Home() {
         <HomePageStats />
         <SplineScene />
         <JimSimons />
+        <JimSimons />
+        <FeaturedOn
+          title="We’ve been featured in"
+          subtitle="Coverage from leading business publications"
+          logos={DEFAULT_FEATURED_LOGOS}
+          className="bg-gray-50"
+          />
+
+<Testimonials />
+
         <Testimonials />
         <Blogs />
         <AIFForm />
