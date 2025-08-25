@@ -78,9 +78,9 @@ export default function FeaturedOn({
                 <Image
                   src={logo.src}
                   alt={logo.name}
-                  width={logo.width ?? 200}
-                  height={logo.height ?? 60}
-                  className="h-10 w-auto object-contain"
+                  width={logo.width ?? 400}
+                  height={logo.height ?? 120}
+                  className="h-14 sm:h-16 md:h-20 w-auto object-contain"
                 />
                 <span className="sr-only">{logo.name}</span>
               </>
