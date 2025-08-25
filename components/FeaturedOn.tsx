@@ -20,12 +20,12 @@ interface FeaturedOnProps {
 
 // 🔹 Default logos baked into the component
 export const DEFAULT_FEATURED_LOGOS: FeaturedLogo[] = [
-  { name: "The Economic Times",  src: "/logos/Economic-times.png",   width: 200, height: 60 },
-  { name: "Entrepreneur India",  src: "/logos/Entrepreneur-India.png", width: 200, height: 60 },
-  { name: "Entracker",           src: "/logos/Entracker.png",        width: 200, height: 60 },
-  { name: "Business Today",      src: "/logos/Business-today.png",   width: 200, height: 60 },
-  { name: "ET Edge",             src: "/logos/ET-Edge.png",          width: 200, height: 60 },
-  { name: "News 18",             src: "/logos/News18.png",           width: 200, height: 60 },
+  { name: "The Economic Times",  src: "/logos/Economic-times.png",   width: 300, height: 90 },
+  { name: "Entrepreneur India",  src: "/logos/Entrepreneur-India.png", width: 300, height: 90 },
+  { name: "Entracker",           src: "/logos/Entracker.png",        width: 300, height: 90 },
+  { name: "Business Today",      src: "/logos/Business-today.png",   width: 300, height: 90 },
+  { name: "ET Edge",             src: "/logos/ET-Edge.png",          width: 300, height: 90 },
+  { name: "News 18",             src: "/logos/News18.png",           width: 300, height: 90 },
 ];
 
 /**
