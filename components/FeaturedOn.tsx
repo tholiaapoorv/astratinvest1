@@ -20,12 +20,12 @@ interface FeaturedOnProps {
 
 // 🔹 Default logos baked into the component
 export const DEFAULT_FEATURED_LOGOS: FeaturedLogo[] = [
-  { name: "The Economic Times",  src: "/logos/Economic-times.png",   width: 400, height: 120 },
-  { name: "Entrepreneur India",  src: "/logos/Entrepreneur-India.png", width: 400, height: 120 },
-  { name: "Entracker",           src: "/logos/Entracker.png",        width: 400, height: 120 },
-  { name: "Business Today",      src: "/logos/Business-today.png",   width: 400, height: 120 },
-  { name: "ET Edge",             src: "/logos/ET-Edge.png",          width: 400, height: 120 },
-  { name: "News 18",             src: "/logos/News18.png",           width: 400, height: 120 },
+  { name: "The Economic Times",  src: "/logos/Economic-times.png",   width: 300, height: 90 },
+  { name: "Entrepreneur India",  src: "/logos/Entrepreneur-India.png", width: 300, height: 90 },
+  { name: "Entracker",           src: "/logos/Entracker.png",        width: 300, height: 90 },
+  { name: "Business Today",      src: "/logos/Business-today.png",   width: 300, height: 90 },
+  { name: "ET Edge",             src: "/logos/ET-Edge.png",          width: 300, height: 90 },
+  { name: "News 18",             src: "/logos/News18.png",           width: 300, height: 90 },
 ];
 
 /**
@@ -78,8 +78,8 @@ export default function FeaturedOn({
                 <Image
                   src={logo.src}
                   alt={logo.name}
-                  width={logo.width ?? 400}
-                  height={logo.height ?? 120}
+                  width={logo.width ?? 300}
+                  height={logo.height ?? 90}
                   className="h-14 sm:h-16 md:h-20 w-auto object-contain"
                 />
                 <span className="sr-only">{logo.name}</span>
