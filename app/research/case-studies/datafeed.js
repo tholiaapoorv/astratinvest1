@@ -82,3 +82,4 @@ class CustomDatafeed {
 }
 const customDatafeed = new CustomDatafeed();
 export default customDatafeed;
+
