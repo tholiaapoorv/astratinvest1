@@ -97,6 +97,7 @@ const InvestorRelationsPage = () => {
   { month: "September 2025" },
   { month: "October 2025" },
   { month: "November 2025" },
+  { month: "December 2025" },
 ].map(({ month }) => (
   <tr key={month}>
     <td className="px-4 py-2 border">{month}</td>
