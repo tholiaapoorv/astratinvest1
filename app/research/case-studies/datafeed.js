@@ -1,16 +1,4 @@
-
-async function loadJson() {
-    try {
-        let response = await fetch("data_point.json");
-        let data = await response.json();
-        console.log("data fetched successfully");
-        console.log(data)
-        return data;
-    } catch (error) {
-        console.error('Error loading JSON:', error);
-    }
-}
-let jsonData = await loadJson();
+import jsonData from "@/public/data_point.json";
 class CustomDatafeed {
     async onReady(cb) {
         console.log("onReady")
