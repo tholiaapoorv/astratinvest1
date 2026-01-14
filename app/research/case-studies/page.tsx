@@ -35,81 +35,67 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
-    if (!containerRef.current) {
-      console.log('TradingView: Container ref not ready');
-      return;
-    }
+    if (!containerRef.current) return;
 
-    console.log('TradingView: Initializing chart widget');
+    const widgetOptions: ChartingLibraryWidgetOptions = {
+      container: containerRef.current,
+      library_path: '/static/charting_library/',
+      datafeed: customDatafeed,
+      symbol: 'NIFTY 50',
+      interval: '1M' as ResolutionString,
+      locale: 'en',
+      autosize: true,
+      theme: 'light',
+      studies_overrides: {},
+      disabled_features: ["header_widget", "left_toolbar", "chart_zoom", "horz_touch_drag_scroll", "vert_touch_drag_scroll"],
+    };
+    const tvWidget = new widget(widgetOptions);
+    tvWidget.onChartReady(() => {
+      const chart = tvWidget.chart();
+      const rectangles = [
+        [1475452800000, 1483315200000],
+        [1501545600000, 1504224000000],
+        [1514764800000, 1522627200000],
+        [1538352000000, 1548979200000],
+        [1561939200000, 1564617600000],
+        [1577836800000, 1585699200000],
+        [1604275200000, 1609459200000],
+        [1630454400000, 1641168000000],
+        [1646179200000, 1654041600000],
+        [1659312000000, 1661990400000],
+        [1667260800000, 1675209600000],
+        [1693526400000, 1696291200000],
+        [1706745600000, 1709251200000],
+        [1714608000000, 1717372800000],
+        [1722470400000, 1740787200000],
+        [1754006400000, 1756684800000]
+      ]
+      chart.onDataLoaded().subscribe(
+        null,
+        () => {
+          rectangles.forEach(([r1, r2]) => {
+            chart.createMultipointShape(
+              [
+                { time: r1 / 1000, price: 0 },
+                { time: r2 / 1000, price: 1000000 },
 
-    try {
-      const widgetOptions: ChartingLibraryWidgetOptions = {
-        container: containerRef.current,
-        library_path: '/static/charting_library/',
-        datafeed: customDatafeed,
-        symbol: 'NIFTY 50',
-        interval: '1M' as ResolutionString,
-        locale: 'en',
-        autosize: true,
-        theme: 'light',
-        studies_overrides: {},
-        disabled_features: ["header_widget", "left_toolbar", "chart_zoom", "horz_touch_drag_scroll", "vert_touch_drag_scroll"],
-      };
-      const tvWidget = new widget(widgetOptions);
-      tvWidget.onChartReady(() => {
-        console.log('TradingView: Chart ready');
-        const chart = tvWidget.chart();
-        const rectangles = [
-          [1475452800000, 1483315200000],
-          [1501545600000, 1504224000000],
-          [1514764800000, 1522627200000],
-          [1538352000000, 1548979200000],
-          [1561939200000, 1564617600000],
-          [1577836800000, 1585699200000],
-          [1604275200000, 1609459200000],
-          [1630454400000, 1641168000000],
-          [1646179200000, 1654041600000],
-          [1659312000000, 1661990400000],
-          [1667260800000, 1675209600000],
-          [1693526400000, 1696291200000],
-          [1706745600000, 1709251200000],
-          [1714608000000, 1717372800000],
-          [1722470400000, 1740787200000],
-          [1754006400000, 1756684800000]
-        ]
-        chart.onDataLoaded().subscribe(
-          null,
-          () => {
-            console.log('TradingView: Data loaded, drawing rectangles');
-            rectangles.forEach(([r1, r2]) => {
-              chart.createMultipointShape(
-                [
-                  { time: r1 / 1000, price: 0 },
-                  { time: r2 / 1000, price: 1000000 },
-
-                ],
-                {
-                  shape: 'rectangle',
-                  disableSelection: true,
-                  disableUndo: true,
-                  filled: true,
-                  lock: true
-                }
-              )
-            })
-          }
-        )
-      });
-      return () => {
-        console.log('TradingView: Cleaning up widget');
-        tvWidget.remove();
-      };
-    } catch (error) {
-      console.error('TradingView: Error initializing chart', error);
-    }
+              ],
+              {
+                shape: 'rectangle',
+                disableSelection: true,
+                disableUndo: true,
+                filled: true,
+                lock: true
+              }
+            )
+          })
+        }
+      )
+    });
+    return () => {
+      tvWidget.remove();
+    };
   }, [caseStudies]);
-
-  console.log('Case studies:', caseStudies.map(cs => cs.name));
 
   const SampleImageComponent = ({ value, isInline }: any) => {
     const { width, height } = getImageDimensions(value);
@@ -276,37 +262,36 @@ const Page = () => {
                         )}
                       </div>
                       <div className="flex w-full items-center justify-center gap-10 xsPhone:flex-col tablet:flex-row">
-                        {
-                          (caseStudy.name === "Efficacy of the MSQ system" ? (
-                            <>
-                              {console.log('TradingView: Rendering container for', caseStudy.name)}
-                              <div ref={containerRef} className="h-[500px] w-full xsPhone:w-full tablet:w-[50%]" />
-                            </>
-                          ) : (
-                            caseStudy.image2 ? (
-                              <>
-                                <SanityImage
-                                  src={caseStudy.image}
-                                  className="h-auto w-fit xsPhone:w-full tablet:w-[50%]"
-                                />
-                                <SanityImage
-                                  src={caseStudy.image2}
-                                  className="h-auto w-fit xsPhone:w-full tablet:w-[50%]"
-                                />
-                              </>
-                            ) : (
-                              <SanityImage
-                                src={caseStudy.image}
-                                className="h-auto w-fit xsPhone:w-full tablet:w-[70%]"
-                              />
-                            )
-                          ))
-                        }
+                        {caseStudy.image2 ? (
+                          <>
+                            <SanityImage
+                              src={caseStudy.image}
+                              className="h-auto w-fit xsPhone:w-full tablet:w-[50%]"
+                            />
+                            <SanityImage
+                              src={caseStudy.image2}
+                              className="h-auto w-fit xsPhone:w-full tablet:w-[50%]"
+                            />
+                          </>
+                        ) : (
+                          <SanityImage
+                            src={caseStudy.image}
+                            className="h-auto w-fit xsPhone:w-full tablet:w-[70%]"
+                          />
+                        )}
                       </div>
                     </div>
                   );
                 })
               )}
+              <div className="flex flex-col gap-10">
+                <h1 className="font-ivy text-[min(4vh,4vw)] font-bold tracking-wide">
+                  Efficacy of the MSQ system
+                </h1>
+                <div className="flex w-full items-center justify-center gap-10 xsPhone:flex-col tablet:flex-row">
+                  <div ref={containerRef} className="h-[500px] w-full" />
+                </div>
+              </div>
               <div className="flex flex-col gap-10">
                 <h1 className="font-ivy text-[min(4vh,4vw)] font-bold tracking-wide">
                   Dynamic Calculative Exposure
