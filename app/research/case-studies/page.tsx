@@ -17,6 +17,7 @@ const Page = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [caseStudies, setCaseStudies] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     setLoading(true);
     const response = axios.get(
@@ -31,7 +32,11 @@ const Page = () => {
         console.log(err);
         setLoading(false);
       });
-    if (!containerRef.current) return
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
     const widgetOptions: ChartingLibraryWidgetOptions = {
       container: containerRef.current,
       library_path: '/static/charting_library/',
@@ -90,8 +95,7 @@ const Page = () => {
     return () => {
       tvWidget.remove();
     };
-  }, []);
-  console.log(caseStudies);
+  }, [caseStudies]);
 
   const SampleImageComponent = ({ value, isInline }: any) => {
     const { width, height } = getImageDimensions(value);
@@ -258,34 +262,36 @@ const Page = () => {
                         )}
                       </div>
                       <div className="flex w-full items-center justify-center gap-10 xsPhone:flex-col tablet:flex-row">
-                        {
-                          (caseStudy.name === "Efficacy of the MSQ system" ? (
-                            <div ref={containerRef} className="h-auto w-fit xsPhone:w-full tablet:w-[50%]" />
-                          ) : (
-                            caseStudy.image2 ? (
-                              <>
-                                <SanityImage
-                                  src={caseStudy.image}
-                                  className="h-auto w-fit xsPhone:w-full tablet:w-[50%]"
-                                />
-                                <SanityImage
-                                  src={caseStudy.image2}
-                                  className="h-auto w-fit xsPhone:w-full tablet:w-[50%]"
-                                />
-                              </>
-                            ) : (
-                              <SanityImage
-                                src={caseStudy.image}
-                                className="h-auto w-fit xsPhone:w-full tablet:w-[70%]"
-                              />
-                            )
-                          ))
-                        }
+                        {caseStudy.image2 ? (
+                          <>
+                            <SanityImage
+                              src={caseStudy.image}
+                              className="h-auto w-fit xsPhone:w-full tablet:w-[50%]"
+                            />
+                            <SanityImage
+                              src={caseStudy.image2}
+                              className="h-auto w-fit xsPhone:w-full tablet:w-[50%]"
+                            />
+                          </>
+                        ) : (
+                          <SanityImage
+                            src={caseStudy.image}
+                            className="h-auto w-fit xsPhone:w-full tablet:w-[70%]"
+                          />
+                        )}
                       </div>
                     </div>
                   );
                 })
               )}
+              <div className="flex flex-col gap-10">
+                <h1 className="font-ivy text-[min(4vh,4vw)] font-bold tracking-wide">
+                  Efficacy of the MSQ system
+                </h1>
+                <div className="flex w-full items-center justify-center gap-10 xsPhone:flex-col tablet:flex-row">
+                  <div ref={containerRef} className="h-[500px] w-full" />
+                </div>
+              </div>
               <div className="flex flex-col gap-10">
                 <h1 className="font-ivy text-[min(4vh,4vw)] font-bold tracking-wide">
                   Dynamic Calculative Exposure
