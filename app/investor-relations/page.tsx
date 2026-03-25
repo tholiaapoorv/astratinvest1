@@ -122,4 +122,4 @@ const InvestorRelationsPage = () => {
   );
 };
 
-export default InvestorRelationsPage;
+export default InvestorRelationsPage; 
