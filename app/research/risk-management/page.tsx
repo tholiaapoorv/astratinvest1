@@ -115,50 +115,52 @@ const features = [
 ];
 const page = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-      className="my-10 flex flex-col items-center justify-center gap-[3.5rem] py-6"
-    >
-      <div className="flex flex-col items-center justify-center gap-[3.5rem]">
-        <h1 className="text-center font-poppins font-semibold uppercase tracking-[0.35em] text-[#3959E5] phone:text-[min(4vh,4vw)] smTablet:text-[min(2.35vh,2.35vw)]">
-          Intelligent Risk Management
-        </h1>
-        <p className="w-[80%] text-pretty text-center font-poppins font-light leading-relaxed tracking-wider text-[#000000] phone:text-[min(3vh,3vw)] smTablet:text-[min(2.1vh,2.1vw)]">
-          At AstratInvest, we believe that superior risk management is the key
-          to consistent, long-term outperformance in the Indian equity markets.
-          Our proprietary quantitative model integrates risk management at every
-          step of the investment process, ensuring that we maintain a balanced
-          risk-reward profile across our portfolio.
-        </p>
-      </div>
-      <div className="flex flex-col items-center justify-center gap-[3.5rem]">
-        <p className="text-center font-poppins font-extralight phone:text-[min(7vh,7vw)] smTablet:text-[min(4.5vh,4.5vw)]">
-          Key{" "}
-          <span className="font-ivy_thin_italic italic text-[#3959E5]">
-            Features
-          </span>
-        </p>
-        <div className="grid w-[85%] flex-col items-start justify-center gap-[3rem] phone:grid-cols-1 smLaptop:grid-cols-2">
-          {features.map((item, idx) => {
-            return (
-              <div
-                key={idx}
-                className="flex h-full flex-col items-start justify-start gap-6 rounded-lg bg-[#fafafa] p-10"
-              >
-                <h2 className="font-ivy tracking-widest text-[#3959E5] phone:text-[min(5vh,5vw)] smTablet:text-[min(3.5vh,3.5vw)]">
-                  {item.title}{" "}
-                </h2>
-                <div className="text-pretty text-start font-poppins font-light leading-relaxed tracking-wider text-[#000000] phone:text-[min(3vh,3vw)] smTablet:text-[min(2.1vh,2.1vw)]">
-                  {item.description}
-                </div>
-              </div>
-            );
-          })}
+    <main id="main-content">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="my-10 flex flex-col items-center justify-center gap-[3.5rem] py-6"
+      >
+        <div className="flex flex-col items-center justify-center gap-[3.5rem]">
+          <h1 className="text-center font-poppins font-semibold uppercase tracking-[0.35em] text-[#3959E5] phone:text-[min(4vh,4vw)] smTablet:text-[min(2.35vh,2.35vw)]">
+            Intelligent Risk Management
+          </h1>
+          <p className="w-[80%] text-pretty text-center font-poppins font-light leading-relaxed tracking-wider text-[#000000] phone:text-[min(3vh,3vw)] smTablet:text-[min(2.1vh,2.1vw)]">
+            At AstratInvest, we believe that superior risk management is the key
+            to consistent, long-term outperformance in the Indian equity markets.
+            Our proprietary quantitative model integrates risk management at every
+            step of the investment process, ensuring that we maintain a balanced
+            risk-reward profile across our portfolio.
+          </p>
         </div>
-      </div>
-    </motion.div>
+        <div className="flex flex-col items-center justify-center gap-[3.5rem]">
+          <p className="text-center font-poppins font-extralight phone:text-[min(7vh,7vw)] smTablet:text-[min(4.5vh,4.5vw)]">
+            Key{" "}
+            <span className="font-ivy_thin_italic italic text-[#3959E5]">
+              Features
+            </span>
+          </p>
+          <div className="grid w-[85%] flex-col items-start justify-center gap-[3rem] phone:grid-cols-1 smLaptop:grid-cols-2">
+            {features.map((item, idx) => {
+              return (
+                <div
+                  key={idx}
+                  className="flex h-full flex-col items-start justify-start gap-6 rounded-lg bg-[#fafafa] p-10"
+                >
+                  <h2 className="font-ivy tracking-widest text-[#3959E5] phone:text-[min(5vh,5vw)] smTablet:text-[min(3.5vh,3.5vw)]">
+                    {item.title}{" "}
+                  </h2>
+                  <div className="text-pretty text-start font-poppins font-light leading-relaxed tracking-wider text-[#000000] phone:text-[min(3vh,3vw)] smTablet:text-[min(2.1vh,2.1vw)]">
+                    {item.description}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </motion.div>
+    </main>
   );
 };
 

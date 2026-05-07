@@ -107,6 +107,7 @@ const Page = () => {
             // Avoid jumping around with aspect-ratio CSS property
             aspectRatio: width / height,
           }}
+          alt=""
         />
       </div>
     );
@@ -205,7 +206,7 @@ const Page = () => {
     },
   };
   return (
-    <>
+    <main id="main-content">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -267,16 +268,19 @@ const Page = () => {
                                 <SanityImage
                                   src={caseStudy.image}
                                   className="h-auto w-fit xsPhone:w-full tablet:w-[50%]"
+                                  alt={caseStudy.imageAlt || ""}
                                 />
                                 <SanityImage
                                   src={caseStudy.image2}
                                   className="h-auto w-fit xsPhone:w-full tablet:w-[50%]"
+                                  alt={caseStudy.image2Alt || ""}
                                 />
                               </>
                             ) : (
                               <SanityImage
                                 src={caseStudy.image}
                                 className="h-auto w-fit xsPhone:w-full tablet:w-[70%]"
+                                alt={caseStudy.imageAlt || ""}
                               />
                             )
                           ))
@@ -317,7 +321,7 @@ const Page = () => {
           TradingView
         </a>
       </div>
-    </>
+    </main>
   );
 };
 

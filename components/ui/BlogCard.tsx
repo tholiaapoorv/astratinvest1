@@ -20,7 +20,7 @@ const BlogCard = ({
   return (
     <div className="mx-auto flex h-full items-start justify-center gap-12">
       <div className="flex h-full flex-col items-start justify-between gap-5">
-        <SanityImage src={imageSrc} className="h-auto w-fit rounded-3xl" />
+        <SanityImage src={imageSrc} className="h-auto w-fit rounded-3xl" alt=""/>
         <div className="flex w-full justify-between font-poppins font-extralight phone:text-[min(3vh,3vw)] smTablet:text-[min(1.6vh,1.6vw)]">
           <p className=" ">Author: Astratinvest </p> &nbsp; &nbsp; &nbsp;
           <p className=" ">{new Date(date).toUTCString()}</p>

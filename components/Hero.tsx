@@ -33,14 +33,15 @@ const Hero = () => {
         <Carousel
           autoPlay
           animationHandler={"fade"}
-          stopOnHover={false}
+          stopOnHover={true}
           infiniteLoop
           interval={6000}
           showStatus={false}
-          swipeable={false}
+          swipeable={true}
           transitionTime={550}
-          showIndicators={false}
+          showIndicators={true}
           showThumbs={false}
+          aria-label="Homepage highlights carousel"
           className="absolute left-[50%] top-[50%] w-full translate-x-[-50%] translate-y-[-50%]"
         >
           <div className="flex flex-col items-center justify-center gap-6">
@@ -49,34 +50,34 @@ const Hero = () => {
               <br className="phone:block smLaptop:hidden" />
               with Quant
             </h1>
-            <h4 className="hero-desc-2 text-pretty text-center font-poppins font-extralight leading-relaxed tracking-wide text-white phone:w-[80%] phone:text-[min(4.4vw,4.4vh)] smTablet:w-full smTablet:text-[min(3.4vw,3.4vh)]">
+            <p className="hero-desc-2 text-pretty text-center font-poppins font-extralight leading-relaxed tracking-wide text-white phone:w-[80%] phone:text-[min(4.4vw,4.4vh)] smTablet:w-full smTablet:text-[min(3.4vw,3.4vh)]">
               Offer extreme personalization, bespoke research,
               <br />
               tailored to Indian markets.
-            </h4>
+            </p>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-6">
-            <h1 className="hero-tagline-1 text-pretty text-center font-ivy leading-tight text-white phone:text-[min(12.5vw,12.5vh)] smTablet:text-[min(11vw,11vh)]">
+            <h2 className="hero-tagline-1 text-pretty text-center font-ivy leading-tight text-white phone:text-[min(12.5vw,12.5vh)] smTablet:text-[min(11vw,11vh)]">
               Maximize <br className="phone:block smLaptop:hidden" />
               Risk Adjusted Returns
-            </h1>
-            <h4 className="hero-desc-1 text-pretty text-center font-poppins font-extralight leading-relaxed tracking-wide text-white phone:w-[80%] phone:text-[min(4.4vw,4.4vh)] smTablet:w-full smTablet:text-[min(3.4vw,3.4vh)]">
+            </h2>
+            <p className="hero-desc-1 text-pretty text-center font-poppins font-extralight leading-relaxed tracking-wide text-white phone:w-[80%] phone:text-[min(4.4vw,4.4vh)] smTablet:w-full smTablet:text-[min(3.4vw,3.4vh)]">
               Maximize returns through quantitative models, balancing <br />
               alphas and risk exposure.
-            </h4>
+            </p>
           </div>
 
           <div className="flex flex-col items-center justify-center gap-6">
-            <h1 className="hero-tagline-2 text-pretty text-center font-ivy leading-tight text-white phone:text-[min(12.5vw,12.5vh)] smTablet:text-[min(11vw,11vh)]">
+            <h2 className="hero-tagline-2 text-pretty text-center font-ivy leading-tight text-white phone:text-[min(12.5vw,12.5vh)] smTablet:text-[min(11vw,11vh)]">
               Tailored for India, <br className="phone:block smLaptop:hidden" />
               Fueled by Data
-            </h1>
-            <h4 className="hero-desc-2 text-pretty text-center font-poppins font-extralight leading-relaxed tracking-wide text-white phone:w-[80%] phone:text-[min(4.4vw,4.4vh)] smTablet:w-full smTablet:text-[min(3.4vw,3.4vh)]">
+            </h2>
+            <p className="hero-desc-2 text-pretty text-center font-poppins font-extralight leading-relaxed tracking-wide text-white phone:w-[80%] phone:text-[min(4.4vw,4.4vh)] smTablet:w-full smTablet:text-[min(3.4vw,3.4vh)]">
               Capitalize on opportunities with
               <br />
               quant-driven investments.
-            </h4>
+            </p>
           </div>
         </Carousel>
         <div className="absolute bottom-[3rem] flex w-full flex-col items-center justify-center gap-2 text-center">

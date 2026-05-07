@@ -33,13 +33,13 @@ const Research = () => {
     <div className="mt-[5rem] flex h-full w-screen flex-col items-center justify-center bg-transparent">
       <Image
         src={researchBg}
-        alt="dp"
+        alt=""
         className="absolute z-[-1] h-auto w-full phone:mt-0 smLaptop:mt-[30rem]"
       />
       <div className="flex flex-col items-center justify-center gap-0">
         <Image
           src={research1}
-          alt="dp"
+          alt="Research section icon"
           className="mt-[3rem] h-auto w-[4.2rem]"
         />
 
@@ -55,7 +55,12 @@ const Research = () => {
           </p>
         </div>
       </div>
-      <div className="no-scrollbar mt-3 flex w-[80%] items-center justify-start gap-6 overflow-x-scroll p-6">
+      <div 
+        className="no-scrollbar mt-3 flex w-[80%] items-center justify-start gap-6 overflow-x-scroll p-6"
+        tabIndex={0} 
+        role="region" 
+        aria-label="Research navigation"
+      >
         {buttons.map((item, index) => {
           return (
             <Link

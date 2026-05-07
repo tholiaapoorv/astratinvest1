@@ -4,6 +4,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import z from "zod";
+import "../app/globals.css";
 
 // --- Move static data OUTSIDE the component to avoid recreations ---
 const ACCOUNT_OPTIONS = [
@@ -132,42 +133,58 @@ const AIFForm = () => {
           <form onSubmit={onSubmit} className="w-full space-y-6 font-poppins">
             {/* Names */}
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <input
-                ref={firstNameRef}
-                required
-                placeholder="First Name*"
-                className="p-4 bg-[#1a1a2f] rounded-md text-white border border-white/20"
-                autoComplete="given-name"
-              />
-              <input
-                ref={lastNameRef}
-                required
-                placeholder="Last Name*"
-                className="p-4 bg-[#1a1a2f] rounded-md text-white border border-white/20"
-                autoComplete="family-name"
-              />
+              <div className="flex flex-col gap-1">
+                <label htmlFor="firstName" className="sr-only">First Name</label>
+                <input
+                  id="firstName"
+                  ref={firstNameRef}
+                  required
+                  placeholder="First Name*"
+                  className="p-4 bg-[#1a1a2f] rounded-md text-white border border-white/20"
+                  autoComplete="given-name"
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label htmlFor="lastName" className="sr-only">Last Name</label>
+                <input
+                  id="lastName"
+                  ref={lastNameRef}
+                  required
+                  placeholder="Last Name*"
+                  className="p-4 bg-[#1a1a2f] rounded-md text-white border border-white/20"
+                  autoComplete="family-name"
+                />
+              </div>
             </div>
 
             {/* Email / Phone */}
-            <input
-              ref={emailRef}
-              required
-              placeholder="Email*"
-              type="email"
-              className="p-4 w-full bg-[#1a1a2f] rounded-md text-white border border-white/20"
-              autoComplete="email"
-              inputMode="email"
-            />
-            <input
-              ref={phoneRef}
-              required
-              placeholder="Phone Number*"
-              type="tel"
-              inputMode="tel"
-              maxLength={15}
-              className="p-4 w-full bg-[#1a1a2f] rounded-md text-white border border-white/20"
-              autoComplete="tel"
-            />
+            <div className="flex flex-col gap-1">
+              <label htmlFor="email" className="sr-only">Email</label>
+              <input
+                id='email'
+                ref={emailRef}
+                required
+                placeholder="Email*"
+                type="email"
+                className="p-4 w-full bg-[#1a1a2f] rounded-md text-white border border-white/20"
+                autoComplete="email"
+                inputMode="email"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label htmlFor="phone" className="sr-only">Phone Number</label>
+              <input
+                id="phone"
+                ref={phoneRef}
+                required
+                placeholder="Phone Number*"
+                type="tel"
+                inputMode="tel"
+                maxLength={15}
+                className="p-4 w-full bg-[#1a1a2f] rounded-md text-white border border-white/20"
+                autoComplete="tel"
+              />
+            </div>
 
             {/* Dropdowns (native <select> = faster + scrollable everywhere) */}
             <Select

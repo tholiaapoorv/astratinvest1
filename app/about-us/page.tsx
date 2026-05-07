@@ -8,7 +8,9 @@ const page = () => {
   return (
     <div>
       <NavBar />
-      <WhyUs />
+      <main id="main-content">
+        <WhyUs />
+      </main>
       <Footer />
     </div>
   );

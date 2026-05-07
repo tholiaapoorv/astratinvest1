@@ -50,6 +50,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
             // Avoid jumping around with aspect-ratio CSS property
             aspectRatio: width / height,
           }}
+          alt=""
         />
       </div>
     );
@@ -152,6 +153,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
         <SanityImage
           src={blog[0].mainImage}
           className="relatve max-h-[80vh] min-w-full object-fill brightness-50"
+          alt={blog[0].title}
         />
         <div className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] font-ivy font-bold xsPhone:text-[min(5vw,5vh)] smLaptop:text-[min(6.5vw,6.5vh)]">
           {blog[0].title}

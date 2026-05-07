@@ -4,7 +4,9 @@ import React from "react";
 const Page = () => {
   return (
     <div>
-      <QuantModel />
+      <main id="main-content">
+        <QuantModel />
+      </main>
     </div>
   );
 };

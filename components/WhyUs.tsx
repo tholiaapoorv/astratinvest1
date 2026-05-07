@@ -149,6 +149,7 @@ const WhyUs = () => {
                   <SanityImage
                     src={member.image}
                     className="aspect-square h-auto w-fit object-cover"
+                    alt={member.name}
                   />
                 </div>
                 <div className="w-full space-y-6 p-6 text-center font-poppins font-light">

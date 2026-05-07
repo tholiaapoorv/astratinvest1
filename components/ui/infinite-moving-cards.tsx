@@ -138,6 +138,7 @@ export const CardTitle = ({
           <SanityImage
             src={children.image}
             className="h-full w-full object-cover"
+            alt={children.name}
           />
         ) : (
           <User2Icon className="h-full w-full text-white" />

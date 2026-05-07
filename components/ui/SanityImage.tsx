@@ -9,17 +9,19 @@ function SanityImage({
   src,
   className,
   style,
+  alt,
 }: {
   src: SanityImageSource;
   className: string;
   style?: any;
+  alt: string;
 }) {
   const imageProps = useNextSanityImage(client, src);
   return (
     <Image
       {...imageProps}
       style={{ maxWidth: "100%", height: "auto", ...style }} // layout="intrinsic" prior to Next 13.0.0
-      alt={""}
+      alt={alt ?? ""}
       className={className}
     />
   );

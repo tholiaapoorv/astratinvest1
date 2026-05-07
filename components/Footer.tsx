@@ -15,6 +15,7 @@ const Footer = () => {
           <div className="space-y-10 xsPhone:w-full smLaptop:w-[70%]">
             <a
               href="https://astratinvest.com/"
+              aria-label="Astratinvest - Go to homepage"
               className="flex w-fit items-center gap-8"
             >
               <Image
@@ -26,7 +27,7 @@ const Footer = () => {
                 ASTRATINVEST
               </p>
             </a>
-            <p className="w-[90%] text-gray-500">
+            <p className="w-[90%] text-gray-300">
               AIF SEBI Registration: IN/AIF3/25-26/1795<br />
               NISM-Series-XIX-C: Alternative Investment Fund Managers Certification Examination-Registration Number: NISM-202300185256
             </p>
@@ -37,7 +38,7 @@ const Footer = () => {
               <h2 className="mb-6 text-sm font-semibold uppercase text-white dark:text-white">
                 Explore
               </h2>
-              <ul className="space-y-4 font-medium text-gray-500 dark:text-gray-400">
+              <ul className="space-y-4 font-medium text-gray-300 dark:text-gray-300">
                 <li>
                   <a href="/about-us" className="hover:underline">About Us</a>
                 </li>
@@ -54,7 +55,7 @@ const Footer = () => {
               <h2 className="mb-6 text-sm font-semibold uppercase text-white dark:text-white">
                 Research
               </h2>
-              <ul className="space-y-4 font-medium text-gray-500 dark:text-gray-400">
+              <ul className="space-y-4 font-medium text-gray-300 dark:text-gray-300">
                 <li>
                   <a href="/research/quantitative-model" className="hover:underline">Quantitative Model</a>
                 </li>
@@ -71,7 +72,7 @@ const Footer = () => {
               <h2 className="mb-6 text-sm font-semibold uppercase text-white dark:text-white">
                 Legal
               </h2>
-              <ul className="space-y-4 font-medium text-gray-500 dark:text-gray-400">
+              <ul className="space-y-4 font-medium text-gray-300 dark:text-gray-300">
                 <li>
                   <a href="/privacy-policy" className="hover:underline">Privacy Policy</a>
                 </li>
@@ -90,7 +91,7 @@ const Footer = () => {
               <AccordionTrigger className="text-sm font-semibold uppercase text-white dark:text-white">
                 Explore
               </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-4 font-medium text-gray-500 dark:text-gray-400">
+              <AccordionContent className="flex flex-col gap-4 font-medium text-gray-300 dark:text-gray-300">
                 <a href="/about-us" className="hover:underline">About Us</a>
                 <a href="/blog" className="hover:underline">Blogs</a>
                 <a href="/AIF" className="hover:underline">AIF Fund</a>
@@ -101,7 +102,7 @@ const Footer = () => {
               <AccordionTrigger className="text-sm font-semibold uppercase text-white dark:text-white">
                 Research
               </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-4 font-medium text-gray-500 dark:text-gray-400">
+              <AccordionContent className="flex flex-col gap-4 font-medium text-gray-300 dark:text-gray-300">
                 <a href="/research/quantitative-model" className="hover:underline">Quantitative Model</a>
                 <a href="/research/case-studies" className="hover:underline">Case Studies</a>
                 <a href="/research/risk-management" className="hover:underline">Risk Management</a>
@@ -112,7 +113,7 @@ const Footer = () => {
               <AccordionTrigger className="text-sm font-semibold uppercase text-white dark:text-white">
                 Legal
               </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-4 font-medium text-gray-500 dark:text-gray-400">
+              <AccordionContent className="flex flex-col gap-4 font-medium text-gray-300 dark:text-gray-300">
                 <a href="/privacy-policy" className="hover:underline">Privacy Policy</a>
                 <a href="/terms-and-conditions" className="hover:underline">Terms & Conditions</a>
                 <a href="/investor-relations" className="hover:underline">Investor Relations</a>
@@ -125,7 +126,7 @@ const Footer = () => {
 
         {/* ✅ Updated Copyright + TradingView Line */}
         <div className="sm:flex sm:items-center sm:justify-between flex-wrap gap-4">
-          <span className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
+          <span className="text-sm text-gray-300 dark:text-gray-300 sm:text-center">
             © 2024 <a href="https://astratinvest.com/" className="hover:underline">Astratinvest™</a>. All Rights Reserved.
           </span>
         </div>

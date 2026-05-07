@@ -84,7 +84,7 @@ export const CardTitle = ({
     <div className="flex justify-start items-center gap-6 font-poppins tracking-wide">
       <div className="w-[4rem] h-[4rem] rounded-tl-[1rem] bg-gray-400">
         {children.image && (
-          <SanityImage src={children.image} className="rounded-tl-[1rem]" />
+          <SanityImage src={children.image} className="rounded-tl-[1rem]" alt={children.name} />
         )}
       </div>
       <div className="flex flex-col justify-center items-start ">
