@@ -67,7 +67,7 @@ const ContactUs = () => {
           <p className="mb-8 text-center font-poppins font-light text-white/70 dark:text-gray-400 phone:text-[min(3.2vh,3.5vw)] smTablet:text-[min(2.3vh,2.3vw)] smLaptop:mb-16 smLaptop:text-[min(2.5vh,2.5vw)]">
             Connect with us for a detailed analysis of the stock and we will get
             back to you within{" "}
-            <span className="text-[#3959E6]">3 working Days</span>.
+            <span className="text-[#4969f6]">3 working Days</span>.
           </p>
           <div className="flex items-center justify-center phone:w-[95%] tablet:w-[80%]">
             <form
@@ -263,7 +263,7 @@ const ContactUs = () => {
                 onClick={() => {
                   showConfetti(false);
                 }}
-                className="flex w-full items-center justify-center rounded-[0.75rem] bg-[#3959E6] p-4 text-center text-sm font-medium outline transition"
+                className="flex w-full items-center justify-center rounded-[0.75rem] bg-[#2d45b5] p-4 text-center text-sm font-medium outline transition"
               >
                 {isSubmitting ? (
                   <Loader2 className="h-auto w-8 animate-spin" />

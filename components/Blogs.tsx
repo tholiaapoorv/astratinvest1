@@ -88,7 +88,7 @@ const Blogs = () => {
             blogs.slice(0, 2).map((blog, idx) => {
               return (
                 <Link
-                  href={`${process.env.NEXT_PUBLIC_APP_URL}/view-blog/${blog.slug.current}`}
+                  href={`/view-blog/${blog.slug.current}`}
                   key={idx}
                   className="flex items-center justify-center transition hover:scale-105 xsPhone:py-4 smLaptop:p-4"
                 >

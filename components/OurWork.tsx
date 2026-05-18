@@ -33,12 +33,12 @@ function OurWork() {
               </div>
               <div className="flex flex-col justify-start items-start h-full px-6">
                 <div>
-                  <p className="font-ivy text-[min(10vw,10vh)] font-thin text-[#3959e6]">
+                  <p className="font-ivy text-[min(10vw,10vh)] font-thin text-[#4969f6]">
                     01.
                   </p>
                 </div>
                 <div>
-                  <p className="font-poppins text-[min(4vw,4vh)] font-thin text-[#3959e6]">
+                  <p className="font-poppins text-[min(4vw,4vh)] font-thin text-[#4969f6]">
                     Portfolio Management
                   </p>
                 </div>
@@ -52,12 +52,12 @@ function OurWork() {
               </div>
               <div className="flex flex-col justify-start items-start h-full px-6">
                 <div>
-                  <p className="font-ivy text-[min(10vw,10vh)] font-thin text-[#3959e6]">
+                  <p className="font-ivy text-[min(10vw,10vh)] font-thin text-[#4969f6]">
                     02.
                   </p>
                 </div>
                 <div>
-                  <p className="font-poppins text-[min(4vw,4vh)] font-thin text-[#3959e6]">
+                  <p className="font-poppins text-[min(4vw,4vh)] font-thin text-[#4969f6]">
                     Portfolio Management
                   </p>
                 </div>
@@ -71,12 +71,12 @@ function OurWork() {
               </div>
               <div className="flex flex-col justify-start items-start h-full px-6">
                 <div>
-                  <p className="font-ivy text-[min(10vw,10vh)] font-thin text-[#3959e6]">
+                  <p className="font-ivy text-[min(10vw,10vh)] font-thin text-[#4969f6]">
                     03.
                   </p>
                 </div>
                 <div>
-                  <p className="font-poppins text-[min(4vw,4vh)] font-thin text-[#3959e6]">
+                  <p className="font-poppins text-[min(4vw,4vh)] font-thin text-[#4969f6]">
                     Portfolio Management
                   </p>
                 </div>
@@ -91,12 +91,12 @@ function OurWork() {
               </div>
               <div className="flex flex-col justify-center items-start h-full ">
                 <div>
-                  <p className="font-ivy text-[min(10vw,10vh)] font-thin text-[#3959e6]">
+                  <p className="font-ivy text-[min(10vw,10vh)] font-thin text-[#4969f6]">
                     01.
                   </p>
                 </div>
                 <div>
-                  <p className="font-poppins text-[min(4vw,4vh)] font-thin text-[#3959e6]">
+                  <p className="font-poppins text-[min(4vw,4vh)] font-thin text-[#4969f6]">
                     Portfolio Management
                   </p>
                 </div>

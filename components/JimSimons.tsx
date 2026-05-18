@@ -104,7 +104,7 @@ const JimSimons = () => {
               variants={items}
               className="w-full overflow-hidden font-ivy text-[#000121] xsPhone:text-[min(10vw,10vh)] phone:text-center smTablet:text-[min(7vh,7vw)] smLaptop:text-start smLaptop:text-[min(7vh,7vw)]"
             >
-              The <span className="text-[#3959e6]">{`"Quant King"`}</span>
+              The <span className="text-[#4969f6]">{`"Quant King"`}</span>
             </motion.p>
             <div>
               <motion.p

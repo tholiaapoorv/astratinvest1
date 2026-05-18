@@ -4,6 +4,9 @@ import HPCAGR from "@/components/Graphs/PerformanceRecords/HPCAGR";
 import CalenderPerformance from "@/components/Graphs/PerformanceRecords/CalenderPerformance";
 import Image from "next/image";
 import performanceRecordInvestment from "@/public/graphs/PerformanceRecordInvestment.png";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = { title: "Performance Record" };
 
 const Page = () => {
   return (
@@ -42,26 +45,30 @@ const Page = () => {
             src={performanceRecordInvestment}
             alt="performanceRecordInvestment Graph"
           />
-          <div className="space-y-10 pt-2 font-poppins font-light text-[#000121] opacity-90">
-            <p>
-              <b>Disclaimer:</b> Our strategies backtested results are provided on
-              a calender year basis. Please note that individual portfolio
-              performance may vary due to factors such as fund inflow/outflow and
-              risk profiles. Performance information is not verification is not
-              verified by the regulator.
-            </p>
-            <p>
-              Past performance is not an indicator of future returns. Investment
-              is subject to market risks. **The performance data for the scheme
-              presented above is unaudited and has not been verified by any
-              regulatory authority. It&apos;s important to note that past
-              performance is not indicative of future results. The fund-level
-              performance is calculated using TWRR (Time-Weighted Rate of Return),
-              and individual investor returns may vary based on factors such as
-              investment size, tier, fee structure, and the timing of fund
-              infusion.. Please refer the link to check AIF Benchmark returns:
-              https://www.crisil.com/en/home/what-we-do/financial-products/alternate-investment-funds-benchmarks.html
-            </p>
+          <div className="space-y-10 pt-2 font-poppins font-light">
+            <div className="w-full rounded-md border border-gray-200 bg-white px-6 py-4">
+              <p className="text-[#000121]">
+                <b>Disclaimer:</b> Our strategies backtested results are provided on
+                a calender year basis. Please note that individual portfolio
+                performance may vary due to factors such as fund inflow/outflow and
+                risk profiles. Performance information is not verification is not
+                verified by the regulator.
+              </p>
+            </div>
+            <div className="w-full rounded-md border border-gray-200 bg-white px-6 py-4">
+              <p className="text-[#000121]">
+                Past performance is not an indicator of future returns. Investment
+                is subject to market risks. **The performance data for the scheme
+                presented above is unaudited and has not been verified by any
+                regulatory authority. It&apos;s important to note that past
+                performance is not indicative of future results. The fund-level
+                performance is calculated using TWRR (Time-Weighted Rate of Return),
+                and individual investor returns may vary based on factors such as
+                investment size, tier, fee structure, and the timing of fund
+                infusion.. Please refer the link to check AIF Benchmark returns:
+                https://www.crisil.com/en/home/what-we-do/financial-products/alternate-investment-funds-benchmarks.html
+              </p>
+            </div>
           </div>
         </div>
       </div>

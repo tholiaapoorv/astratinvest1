@@ -47,8 +47,8 @@ const SchemePerformance = () => {
         />
         <Legend />
         <Bar dataKey="AStratinvest" fill="#002147" />
-        <Bar dataKey="BSE500" fill="#D47C34" />
-        <Bar dataKey="NIFTY50" fill="#62833C" />
+        <Bar dataKey="BSE500" fill="#ad550d" />
+        <Bar dataKey="NIFTY50" fill="#567730" />
       </ReBarChart>
     </ResponsiveContainer>
   );

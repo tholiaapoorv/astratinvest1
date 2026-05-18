@@ -106,15 +106,17 @@ export default function Home() {
       >
         <NavBar />
         <Banner />
-        <Hero />
-        <Tagline />
-        <HomePageStats />
-        <SplineScene />
-        <JimSimons />
-        <FeaturedOn className="bg-gray-50"/>
-        <Testimonials />
-        <Blogs />
-        <AIFForm />
+        <main id="main-content">
+          <Hero />
+          <Tagline />
+          <HomePageStats />
+          <SplineScene />
+          <JimSimons />
+          <FeaturedOn className="bg-gray-50"/>
+          <Testimonials />
+          <Blogs />
+          <AIFForm />
+        </main>
         <Footer />
       </div>
     </div>

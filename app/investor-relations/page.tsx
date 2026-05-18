@@ -1,7 +1,9 @@
 import React from "react";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import type { Metadata } from "next";
 
+export const metadata: Metadata = { title: "Investor Relations" };
 
 const InvestorRelationsPage = () => {
   return (

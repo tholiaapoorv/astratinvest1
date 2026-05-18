@@ -109,7 +109,7 @@ const SplineScene = () => {
       /> */}
 
       <div className="absolute z-[-1] xsPhone:bottom-0 xsPhone:w-[180vw] tablet:w-[150vw] smLaptop:bottom-[-3rem] smLaptop:w-full">
-        <Image src={splineModel} alt="" className="w-full object-cover" />
+        <Image src={splineModel} alt="" role="presentation" className="w-full object-cover" />
       </div>
     </div>
   );

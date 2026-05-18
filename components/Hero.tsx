@@ -86,7 +86,9 @@ const Hero = () => {
           </div>
           <ChevronDown className="text-white" />
         </div>
-        <Spline scene="https://prod.spline.design/p3X3DxHpnkcXzYlu/scene.splinecode" />
+        <div aria-hidden="true" role="presentation">
+          <Spline scene="https://prod.spline.design/p3X3DxHpnkcXzYlu/scene.splinecode" />
+        </div>
       </div>
     </div>
   );

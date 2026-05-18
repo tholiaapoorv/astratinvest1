@@ -5,12 +5,14 @@ import { Loader2 } from "lucide-react";
 import React, { Suspense } from "react";
 import { Metadata } from "next";
 
+export const metadata: Metadata = { title: "Blog" };
+
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <div>
         <NavBar />
-        <div className="mt-12 flex min-h-screen w-full items-center justify-center bg-[#ECF0FB]">
+        <div className="mt-12 flex min-h-screen w-full items-center justify-center bg-white">
           <Suspense
             fallback={
               <div className="flex h-screen w-screen items-center justify-center">

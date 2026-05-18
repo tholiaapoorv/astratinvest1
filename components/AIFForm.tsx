@@ -127,7 +127,7 @@ const AIFForm = () => {
           </h2>
           <p className="mb-8 text-center font-poppins text-white/60 phone:text-[min(3.5vw,3.5vh)] sm:text-[min(2.5vw,2.5vh)] smLaptop:mb-12">
             Share your details and our team will get in touch within{" "}
-            <span className="text-[#3959E6]">3 working days</span>.
+            <span className="text-[#4969f6]">3 working days</span>.
           </p>
 
           <form onSubmit={onSubmit} className="w-full space-y-6 font-poppins">
@@ -188,6 +188,7 @@ const AIFForm = () => {
 
             {/* Dropdowns (native <select> = faster + scrollable everywhere) */}
             <Select
+              id="accountType"
               label="Account Type*"
               value={accountType}
               onChange={setAccountType}
@@ -195,6 +196,7 @@ const AIFForm = () => {
               required
             />
             <Select
+              id="contactMethod"
               label="Preferred Communication*"
               value={contactMethod}
               onChange={setContactMethod}
@@ -202,6 +204,7 @@ const AIFForm = () => {
               required
             />
             <Select
+              id="referralSource"
               label="How did you hear about us?"
               value={referralSource}
               onChange={setReferralSource}
@@ -231,7 +234,7 @@ const AIFForm = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="flex w-full items-center justify-center rounded-lg bg-[#3959E6] p-4 text-white font-medium hover:bg-[#2d45b5] disabled:opacity-60"
+              className="flex w-full items-center justify-center rounded-lg bg-[#2d45b5] p-4 text-white font-medium hover:bg-[#253d9e] disabled:opacity-60"
             >
               {isSubmitting ? <Loader2 className="animate-spin w-5 h-5" /> : "Submit"}
             </button>
@@ -250,6 +253,7 @@ function Select<T extends readonly string[]>({
   options,
   placeholder,
   required = false,
+  id,
 }: {
   label: string;
   value: string;
@@ -257,12 +261,14 @@ function Select<T extends readonly string[]>({
   options: T;
   placeholder?: string;
   required?: boolean;
+  id: string;
 }) {
   return (
     <div className="w-full">
-      <label className="block mb-1">{label}</label>
+      <label htmlFor={id} className="block mb-1">{label}</label>
       <div className="relative">
         <select
+          id={id}
           required={required}
           value={value}
           onChange={(e) => onChange(e.target.value)}

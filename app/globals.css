@@ -177,3 +177,13 @@ body {
     scrollbar-width: none; /* Firefox */
   }
 }
+
+/* ── Heatmap keyboard trap fix ───────────────────────────────────
+   Suppress focus on individual SVG rect cells rendered by
+   Syncfusion HeatMap. The outer wrapper div is the focusable
+   entry point instead.
+─────────────────────────────────────────────────────────────────── */
+.e-heatmap svg rect:focus,
+.e-heatmap g rect:focus {
+  outline: none;
+}

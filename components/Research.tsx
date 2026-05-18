@@ -67,8 +67,8 @@ const Research = () => {
               href={`${process.env.NEXT_PUBLIC_APP_URL}/research/${item.href}`}
               key={index}
               className={cn(
-                "flex h-[4rem] w-[70%] items-center justify-center whitespace-nowrap rounded-full bg-[#07335B] px-9 py-4 font-poppins font-semibold tracking-wider text-[#FFFFFF] transition hover:bg-[#4D75FD] phone:text-[min(3vh,3vw)] smTablet:text-[min(1.8vh,1.8vw)]",
-                pathname.includes(item.href) && "bg-[#4D75FD]",
+                "flex h-[4rem] w-[70%] items-center justify-center whitespace-nowrap rounded-full bg-[#07335B] px-9 py-4 font-poppins font-semibold tracking-wider text-[#FFFFFF] transition hover:bg-[#436bf3] phone:text-[min(3vh,3vw)] smTablet:text-[min(1.8vh,1.8vw)]",
+                pathname.includes(item.href) && "bg-[#436bf3]",
               )}
             >
               {item.title}

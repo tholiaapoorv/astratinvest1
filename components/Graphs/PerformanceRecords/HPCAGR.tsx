@@ -41,8 +41,8 @@ const HPCAGR = () => {
         />
         <Legend />
         <Bar dataKey="AStratinvest" fill="#002147" />
-        <Bar dataKey="NIFTY50" fill="#D47C34" />
-        <Bar dataKey="BSE500" fill="#62833C" />
+        <Bar dataKey="NIFTY50" fill="#ad550d" />
+        <Bar dataKey="BSE500" fill="#567730" />
       </ReBarChart>
     </ResponsiveContainer>
   );

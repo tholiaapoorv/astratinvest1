@@ -165,8 +165,37 @@ export default function Heatmap() {
     "Utilities",
   ];
   return (
-    <HeatMapComponent
-      className="h-auto w-[90%]"
+    <div
+      role="region"
+      aria-label="Dynamic Calculative Exposure heatmap — sector exposure data from January 2014 to June 2024"
+      tabIndex={0}
+      className="h-auto w-[90%] focus:outline-2 focus:outline-[#3959E5] focus:outline-offset-2"
+    >
+      {/* Visually hidden data summary for screen readers */}
+      <table className="sr-only">
+        <caption>
+          Dynamic Calculative Exposure by sector, 2014–2024.
+          Values range from -6 (maximum short exposure) to +6 (maximum long exposure).
+          Red cells indicate negative exposure, green cells indicate positive exposure.
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Sector</th>
+            <th scope="col">General trend across period</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>AUTO</td><td>Mixed positive and negative exposure</td></tr>
+          <tr><td>Banks</td><td>Mixed positive and negative exposure</td></tr>
+          <tr><td>Information Technology</td><td>Mixed positive and negative exposure</td></tr>
+          <tr><td>FMCG</td><td>Mixed positive and negative exposure</td></tr>
+          <tr><td>Healthcare</td><td>Mixed positive and negative exposure</td></tr>
+          <tr><td colSpan={2}>Full data visible in the chart above for sighted users.</td></tr>
+        </tbody>
+      </table>
+
+      <HeatMapComponent
+        className="h-auto w-full"
       titleSettings={{
         text: "Dynamic Calculative Exposure",
         textStyle: {
@@ -352,7 +381,8 @@ export default function Heatmap() {
         height: "500",
       }}
     >
-      <Inject services={[Legend, Tooltip]} />
-    </HeatMapComponent>
+        <Inject services={[Legend, Tooltip]} />
+      </HeatMapComponent>
+    </div>
   );
 }
