@@ -66,14 +66,6 @@ const NavBar = () => {
             >
               About Us
             </Link>
-            <Link
-              href="https://investor.astratinvest.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 font-poppins tracking-wide text-white transition hover:text-[#2a45c7] xsPhone:hidden smLaptop:flex"
-            >
-              Investor Login
-            </Link>
             <Sheet>
               <SheetTrigger asChild>
                 <button aria-label="Open navigation menu">
@@ -112,14 +104,6 @@ const NavBar = () => {
                     className="font-poppins tracking-wider transition hover:text-[#2a45c7] xsPhone:text-[min(6vw,6vh)] tablet:text-[min(3vw,3vh)]"
                   >
                     About Us
-                  </Link>
-                  <Link
-                    href="https://investor.astratinvest.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-poppins tracking-wider transition hover:text-[#2a45c7] xsPhone:text-[min(6vw,6vh)] tablet:text-[min(3vw,3vh)]"
-                  >
-                    Investor Login
                   </Link>
                 </div>
               </SheetContent>
