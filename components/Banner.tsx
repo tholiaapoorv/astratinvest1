@@ -15,7 +15,7 @@ const Banner = () => {
         href="/AIF"
         className="text-blue-600 underline hover:text-blue-800"
       >
-        Click here
+        View AIF Details
       </Link>
       &nbsp;to know more.
     </motion.div>

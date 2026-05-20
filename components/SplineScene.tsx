@@ -56,7 +56,9 @@ const SplineScene = () => {
           "spline-scene-container relative top-[5.5rem] flex items-center justify-center"
         }
       >
-        <div className="spline-scene absolute"></div>
+        <div className="spline-scene absolute">
+          <div role="img" aria-label="Decorative 3D visualization of quantitative model"></div>
+        </div>
         <div className="quant-model-text-wrapper relative w-[80%] text-center">
           <p
             className={

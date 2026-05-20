@@ -20,7 +20,7 @@ const BlogCard = ({
   return (
     <div className="mx-auto flex h-full items-start justify-center gap-12">
       <div className="flex h-full flex-col items-start justify-between gap-5">
-        <SanityImage src={imageSrc} className="h-auto w-fit rounded-3xl" alt=""/>
+        <SanityImage src={imageSrc} className="h-auto w-fit rounded-3xl" alt={title} />
         <div className="flex w-full justify-between font-poppins font-extralight phone:text-[min(3vh,3vw)] smTablet:text-[min(1.6vh,1.6vw)]">
           <p className=" ">Author: Astratinvest </p> &nbsp; &nbsp; &nbsp;
           <p className=" ">{new Date(date).toUTCString()}</p>
@@ -33,8 +33,8 @@ const BlogCard = ({
         </p>
         <div className="w-full">
           <Link href={`${process.env.NEXT_PUBLIC_APP_URL}/view-blog/${slug}`}>
-            <button className="flex w-full cursor-pointer items-center justify-center gap-1 border border-[#000121] p-3 font-ivy tracking-wide text-[#000121] transition hover:bg-[#000121] hover:text-white xsPhone:text-[min(3.5vw,3.5vh)] smTablet:text-[min(1.8vw,1.8vh)]">
-              Learn More <TbArrowUpRight className="h-auto phone:w-5" />
+            <button className="flex w-full cursor-pointer items-center justify-center gap-1 border border-[#000121] p-3 font-ivy tracking-wide text-[#000121] transition hover:bg-[#000121] hover:text-white xsPhone:text-[min(3.5vw,3.5vh)] smTablet:text-[min(1.8vw,1.8vh)]" aria-label={`Learn more about ${title}`}>
+              Learn More <TbArrowUpRight className="h-auto phone:w-5" aria-hidden="true" />
             </button>
           </Link>
         </div>

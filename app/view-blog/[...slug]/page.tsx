@@ -148,7 +148,7 @@ const page = async ({ params }: { params: { slug: string } }) => {
     },
   };
   return (
-    <div className="flex w-full flex-col items-center justify-center text-white">
+    <div className="flex w-full flex-col items-center justify-center text-[#1a1a2e]">
       <div className="relative">
         <SanityImage
           src={blog[0].mainImage}

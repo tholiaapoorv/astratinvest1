@@ -1,5 +1,6 @@
 "use client";
 import * as React from "react";
+import { useEffect } from "react";
 import * as ReactDOM from "react-dom";
 import {
   HeatMapComponent,
@@ -11,6 +12,16 @@ import { registerLicense } from "@syncfusion/ej2-base";
 
 registerLicense(process.env.NEXT_PUBLIC_Syncfusion_Key);
 export default function Heatmap() {
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const rects = document.querySelectorAll('.e-heatmap-container svg rect');
+      rects.forEach(rect => {
+        rect.setAttribute('tabindex', '-1');
+        rect.setAttribute('aria-hidden', 'true');
+      });
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
   let heatmapData = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -165,6 +176,7 @@ export default function Heatmap() {
     "Utilities",
   ];
   return (
+    <div role="img" aria-label="Sectorial index scores heatmap showing performance across sectors and time periods. Data available in the table below.">
     <HeatMapComponent
       className="h-auto w-[90%]"
       titleSettings={{
@@ -354,5 +366,6 @@ export default function Heatmap() {
     >
       <Inject services={[Legend, Tooltip]} />
     </HeatMapComponent>
+    </div>
   );
 }
