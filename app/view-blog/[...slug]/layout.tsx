@@ -10,7 +10,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     <>
       <div>
         <NavBar />
-        <div className="mt-12 flex min-h-screen w-full items-center justify-center bg-[#ECF0FB]">
+        <main id="main-content" tabIndex={-1} className="mt-12 flex min-h-screen w-full items-center justify-center bg-[#ECF0FB]">
           <Suspense
             fallback={
               <div className="flex h-screen w-screen items-center justify-center">
@@ -20,7 +20,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           >
             {children}
           </Suspense>
-        </div>
+        </main>
       </div>
       <Footer />
     </>

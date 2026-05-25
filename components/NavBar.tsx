@@ -24,10 +24,10 @@ import Link from "next/link";
 
 import { Separator } from "./ui/separator";
 const NavBar = () => {
-  const containerMain = useRef<HTMLDivElement>(null);
+  const containerMain = useRef<HTMLElement>(null);
 
   return (
-    <div ref={containerMain} className="fixed top-0 z-[50] w-full">
+    <header ref={containerMain} className="fixed top-0 z-[50] w-full">
       <div className="navbar-wrapper flex h-fit items-center justify-center border-b border-white/10 bg-[#000121] backdrop-blur-lg">
         <div className="navbar-container flex w-[80%] items-center justify-between py-2">
           <Link
@@ -40,7 +40,7 @@ const NavBar = () => {
               ASTRATINVEST
             </p>
           </Link>
-          <div className="group flex h-full cursor-pointer items-center justify-center gap-10 px-6 pr-0 transition-all">
+          <nav aria-label="Primary" className="group flex h-full cursor-pointer items-center justify-center gap-10 px-6 pr-0 transition-all">
             <Link
               href="/AIF"
               className="flex items-center justify-center gap-2 font-poppins tracking-wide text-white transition hover:text-[#2a45c7] xsPhone:hidden smLaptop:flex"
@@ -108,10 +108,10 @@ const NavBar = () => {
                 </div>
               </SheetContent>
             </Sheet>
-          </div>
+          </nav>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
