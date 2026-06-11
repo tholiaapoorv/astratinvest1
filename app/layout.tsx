@@ -4,6 +4,7 @@ import "./globals.css";
 import localFonts from "next/font/local";
 import { Toaster } from "sonner";
 import Script from "next/script";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       {/* GTM Script in <head> */}
       <head>
         <Script
@@ -65,8 +66,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           ></iframe>
         </noscript>
 
-        {children}
-        <Toaster closeButton richColors />
+        <ThemeProvider
+          attribute="data-theme"
+          themes={["light", "high-contrast"]}
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster closeButton richColors />
+        </ThemeProvider>
       </body>
     </html>
   );

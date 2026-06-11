@@ -23,6 +23,7 @@ import {
 import Link from "next/link";
 
 import { Separator } from "./ui/separator";
+import HighContrastToggle from "@/components/HighContrastToggle";
 const NavBar = () => {
   const containerMain = useRef<HTMLElement>(null);
 
@@ -66,6 +67,9 @@ const NavBar = () => {
             >
               About Us
             </Link>
+            {/* Compact desktop toggle; hidden below 1030px where only the
+                hamburger Sheet (with its own toggle) is shown. */}
+            <HighContrastToggle className="shrink-0 xsPhone:hidden smLaptop:flex" />
             <Sheet>
               <SheetTrigger asChild>
                 <button aria-label="Open navigation menu">
@@ -105,6 +109,8 @@ const NavBar = () => {
                   >
                     About Us
                   </Link>
+                  {/* Toggle inside the Sheet so it is reachable below 1030px. */}
+                  <HighContrastToggle showText className="mt-4 self-start" />
                 </div>
               </SheetContent>
             </Sheet>
