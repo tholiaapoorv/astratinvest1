@@ -165,9 +165,12 @@ const WhyUs = () => {
                   </p>
                   <Link
                     href={member.linkedin}
+                    aria-label={`${member.name}'s LinkedIn profile`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex w-full items-center justify-center gap-2 bg-[#3959E5] p-2 text-lg tracking-wider text-white transition hover:bg-[#000121]"
                   >
-                    <FaLinkedinIn className="h-auto w-5" />
+                    <FaLinkedinIn className="h-auto w-5" aria-hidden="true" />
                   </Link>
                 </div>
               </div>
