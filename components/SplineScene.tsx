@@ -14,33 +14,37 @@ const SplineScene = () => {
   const mainContainerRef = useRef<HTMLDivElement>(null);
   useGSAP(
     () => {
-      const tl = gsap.timeline({});
-      const splitType = new SplitType(".quant-model-text", {
-        types: ["words", "lines"],
-      });
-      const splitTypeGhost = new SplitType(".quant-model-text-ghost", {
-        types: ["words", "lines"],
-      });
+      // Only run the scroll-driven fade for users who haven't requested
+      // reduced motion. Otherwise the heading renders statically at full
+      // opacity (no fade), which is both contrast-safe and motion-safe.
+      const mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        const tl = gsap.timeline({});
+        const splitType = new SplitType(".quant-model-text", {
+          types: ["words", "lines"],
+        });
 
-      console.log(splitType.lines);
+        tl.fromTo(
+          splitType.words,
+          // Floor the opacity at 0.5 so every animated state stays >= 3:1
+          // against #000121 (large display text). Lowest state: #e7aeff
+          // accent words at ~3.43:1, plain white words at ~5.25:1.
+          { opacity: 0.5 },
+          {
+            opacity: 1,
 
-      tl.fromTo(
-        splitType.words,
-        { opacity: 0 },
-        {
-          opacity: 1,
-
-          ease: "none",
-          duration: 50,
-          stagger: { each: 5 },
-          scrollTrigger: {
-            trigger: ".spline-scene-container",
-            start: "top 80%",
-            end: "bottom center",
-            scrub: true,
+            ease: "none",
+            duration: 50,
+            stagger: { each: 5 },
+            scrollTrigger: {
+              trigger: ".spline-scene-container",
+              start: "top 80%",
+              end: "bottom center",
+              scrub: true,
+            },
           },
-        },
-      );
+        );
+      });
     },
     { scope: mainContainerRef },
   );
@@ -77,27 +81,6 @@ const SplineScene = () => {
             </span>
             and
             <span className="mx-2 font-ivy_thin_italic text-[#e7aeff]">
-              manage portfolio risks
-            </span>
-            in real-time.
-          </p>
-          <p
-            className={
-              "quant-model-text-ghost absolute top-0 z-[-1] overflow-hidden font-poppins leading-relaxed tracking-wide text-white/10 phone:text-[min(4vw,4vh)] smTablet:text-[min(2.5vw,2.5vh)] smLaptop:text-[min(4vw,4vh)]"
-            }
-          >
-            Our investment approach relies on a
-            <span className="mx-2 font-ivy_thin_italic text-[#e7aeff]/10">
-              sophisticated quantitative system
-            </span>
-            that processes vast financial data to evaluate opportunities and
-            risks. This powerhouse integrates advanced mathematical and
-            financial engineering techniques to
-            <span className="mx-2 font-ivy_thin_italic text-[#e7aeff]/10">
-              identify investments
-            </span>
-            and
-            <span className="mx-2 font-ivy_thin_italic text-[#e7aeff]/10">
               manage portfolio risks
             </span>
             in real-time.
