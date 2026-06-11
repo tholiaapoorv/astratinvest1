@@ -310,7 +310,7 @@ const Page = () => {
         </div>
       </motion.div>
       {/* 👇 TradingView Credit */}
-      <div className="mt-4 mb-8 text-center text-sm font-light text-[#8b929c]">
+      <div className="mt-4 mb-8 text-center text-sm font-light text-[#676e78]">
         Data insights powered by{" "}
         <a
           href="https://www.tradingview.com"
