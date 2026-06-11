@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { useEffect } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import * as ReactDOM from "react-dom";
 import {
   HeatMapComponent,
@@ -12,16 +12,43 @@ import { registerLicense } from "@syncfusion/ej2-base";
 
 registerLicense(process.env.NEXT_PUBLIC_Syncfusion_Key);
 export default function Heatmap() {
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const rects = document.querySelectorAll('.e-heatmap-container svg rect');
-      rects.forEach(rect => {
-        rect.setAttribute('tabindex', '-1');
-        rect.setAttribute('aria-hidden', 'true');
-      });
-    }, 2000);
-    return () => clearTimeout(timer);
+  const chartRef = useRef(null);
+
+  // Syncfusion renders one <rect> per data cell (126 months x 20 sectors =
+  // 2,520) plus axis <text> nodes inside an <svg>. They land in the
+  // accessibility tree and the keyboard tab order, which is pure noise: the
+  // data is conveyed by the sr-only summary table below. Hide the whole
+  // graphic from assistive tech and pull every cell out of the tab order.
+  // We query the live subtree via the wrapper ref rather than guessing a
+  // container class name.
+  const applyCellA11y = useCallback(() => {
+    const root = chartRef.current;
+    if (!root) return;
+    const svg = root.querySelector("svg");
+    if (svg) {
+      svg.setAttribute("aria-hidden", "true");
+      svg.setAttribute("focusable", "false");
+      svg.setAttribute("tabindex", "-1");
+    }
+    root.querySelectorAll("rect, text, image, [tabindex]").forEach((el) => {
+      el.setAttribute("tabindex", "-1");
+      el.setAttribute("aria-hidden", "true");
+    });
   }, []);
+
+  // Re-apply on every repaint/resize. Syncfusion swaps out the SVG subtree on
+  // refresh, so a childList/subtree observer catches repaints that the
+  // created/loaded events might miss. We deliberately do NOT observe
+  // attributes, to avoid re-triggering on our own tabindex/aria-hidden writes.
+  useEffect(() => {
+    const root = chartRef.current;
+    if (!root) return;
+    applyCellA11y();
+    const observer = new MutationObserver(() => applyCellA11y());
+    observer.observe(root, { childList: true, subtree: true });
+    return () => observer.disconnect();
+  }, [applyCellA11y]);
+
   let heatmapData = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -175,10 +202,38 @@ export default function Heatmap() {
     "Telecommunications",
     "Utilities",
   ];
+  // Single source of truth for the x-axis month labels: consumed by both the
+  // Syncfusion xAxis and the sr-only summary table column headers.
+  const xLabels = [
+    "Jan2014", "Feb2014", "Mar2014", "Apr2014", "May2014", "Jun2014",
+    "Jul2014", "Aug2014", "Sep2014", "Oct2014", "Nov2014", "Dec2014",
+    "Jan2015", "Feb2015", "Mar2015", "Apr2015", "May2015", "Jun2015",
+    "Jul2015", "Aug2015", "Sep2015", "Oct2015", "Nov2015", "Dec2015",
+    "Jan2016", "Feb2016", "Mar2016", "Apr2016", "May2016", "Jun2016",
+    "Jul2016", "Aug2016", "Sep2016", "Oct2016", "Nov2016", "Dec2016",
+    "Jan2017", "Feb2017", "Mar2017", "Apr2017", "May2017", "Jun2017",
+    "Jul2017", "Aug2017", "Sep2017", "Oct2017", "Nov2017", "Dec2017",
+    "Jan2018", "Feb2018", "Mar2018", "Apr2018", "May2018", "Jun2018",
+    "Jul2018", "Aug2018", "Sep2018", "Oct2018", "Nov2018", "Dec2018",
+    "Jan2019", "Feb2019", "Mar2019", "Apr2019", "May2019", "Jun2019",
+    "Jul2019", "Aug2019", "Sep2019", "Oct2019", "Nov2019", "Dec2019",
+    "Jan2020", "Feb2020", "Mar2020", "Apr2020", "May2020", "Jun2020",
+    "Jul2020", "Aug2020", "Sep2020", "Oct2020", "Nov2020", "Dec2020",
+    "Jan2021", "Feb2021", "Mar2021", "Apr2021", "May2021", "Jun2021",
+    "Jul2021", "Aug2021", "Sep2021", "Oct2021", "Nov2021", "Dec2021",
+    "Jan2022", "Feb2022", "Mar2022", "Apr2022", "May2022", "Jun2022",
+    "Jul2022", "Aug2022", "Sep2022", "Oct2022", "Nov2022", "Dec2022",
+    "Jan2023", "Feb2023", "Mar2023", "Apr2023", "May2023", "Jun2023",
+    "Jul2023", "Aug2023", "Sep2023", "Oct2023", "Nov2023", "Dec2023",
+    "Jan2024", "Feb2024", "Mar2024", "Apr2024", "May2024", "Jun2024",
+  ];
   return (
-    <div role="img" aria-label="Sectorial index scores heatmap showing performance across sectors and time periods. Data available in the table below.">
+    <>
+    <div ref={chartRef} role="img" aria-label="Sectorial index scores heatmap showing performance across sectors and time periods. Data available in the table below.">
     <HeatMapComponent
       className="h-auto w-[90%]"
+      created={applyCellA11y}
+      loaded={applyCellA11y}
       titleSettings={{
         text: "Dynamic Calculative Exposure",
         textStyle: {
@@ -189,134 +244,7 @@ export default function Heatmap() {
         },
       }}
       xAxis={{
-        labels: [
-          "Jan2014",
-          "Feb2014",
-          "Mar2014",
-          "Apr2014",
-          "May2014",
-          "Jun2014",
-          "Jul2014",
-          "Aug2014",
-          "Sep2014",
-          "Oct2014",
-          "Nov2014",
-          "Dec2014",
-          "Jan2015",
-          "Feb2015",
-          "Mar2015",
-          "Apr2015",
-          "May2015",
-          "Jun2015",
-          "Jul2015",
-          "Aug2015",
-          "Sep2015",
-          "Oct2015",
-          "Nov2015",
-          "Dec2015",
-          "Jan2016",
-          "Feb2016",
-          "Mar2016",
-          "Apr2016",
-          "May2016",
-          "Jun2016",
-          "Jul2016",
-          "Aug2016",
-          "Sep2016",
-          "Oct2016",
-          "Nov2016",
-          "Dec2016",
-          "Jan2017",
-          "Feb2017",
-          "Mar2017",
-          "Apr2017",
-          "May2017",
-          "Jun2017",
-          "Jul2017",
-          "Aug2017",
-          "Sep2017",
-          "Oct2017",
-          "Nov2017",
-          "Dec2017",
-          "Jan2018",
-          "Feb2018",
-          "Mar2018",
-          "Apr2018",
-          "May2018",
-          "Jun2018",
-          "Jul2018",
-          "Aug2018",
-          "Sep2018",
-          "Oct2018",
-          "Nov2018",
-          "Dec2018",
-          "Jan2019",
-          "Feb2019",
-          "Mar2019",
-          "Apr2019",
-          "May2019",
-          "Jun2019",
-          "Jul2019",
-          "Aug2019",
-          "Sep2019",
-          "Oct2019",
-          "Nov2019",
-          "Dec2019",
-          "Jan2020",
-          "Feb2020",
-          "Mar2020",
-          "Apr2020",
-          "May2020",
-          "Jun2020",
-          "Jul2020",
-          "Aug2020",
-          "Sep2020",
-          "Oct2020",
-          "Nov2020",
-          "Dec2020",
-          "Jan2021",
-          "Feb2021",
-          "Mar2021",
-          "Apr2021",
-          "May2021",
-          "Jun2021",
-          "Jul2021",
-          "Aug2021",
-          "Sep2021",
-          "Oct2021",
-          "Nov2021",
-          "Dec2021",
-          "Jan2022",
-          "Feb2022",
-          "Mar2022",
-          "Apr2022",
-          "May2022",
-          "Jun2022",
-          "Jul2022",
-          "Aug2022",
-          "Sep2022",
-          "Oct2022",
-          "Nov2022",
-          "Dec2022",
-          "Jan2023",
-          "Feb2023",
-          "Mar2023",
-          "Apr2023",
-          "May2023",
-          "Jun2023",
-          "Jul2023",
-          "Aug2023",
-          "Sep2023",
-          "Oct2023",
-          "Nov2023",
-          "Dec2023",
-          "Jan2024",
-          "Feb2024",
-          "Mar2024",
-          "Apr2024",
-          "May2024",
-          "Jun2024",
-        ],
+        labels: xLabels,
         textStyle: {
           fontFamily: "Poppins",
           size: "8px",
@@ -367,5 +295,35 @@ export default function Heatmap() {
       <Inject services={[Legend, Tooltip]} />
     </HeatMapComponent>
     </div>
+    <table className="sr-only">
+      <caption>
+        Sectorial index scores by sector (rows) and month (columns). Each value
+        is a calculated exposure score ranging from -6 (weakest) to 6
+        (strongest).
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Sector</th>
+          {xLabels.map((month) => (
+            <th scope="col" key={month}>
+              {month}
+            </th>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
+        {yLabels.map((sector, rowIndex) => (
+          <tr key={`${sector}-${rowIndex}`}>
+            <th scope="row">{sector}</th>
+            {xLabels.map((month, colIndex) => (
+              <td key={`${rowIndex}-${colIndex}`}>
+                {heatmapData[colIndex]?.[rowIndex] ?? ""}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    </>
   );
 }
