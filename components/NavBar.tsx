@@ -67,6 +67,22 @@ const NavBar = () => {
             >
               About Us
             </Link>
+            <Link
+              href="https://career.astratinvest.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 font-poppins tracking-wide text-white transition hover:text-[#2a45c7] xsPhone:hidden smLaptop:flex"
+            >
+              Careers
+            </Link>
+            <Link
+              href="https://investor.astratinvest.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 font-poppins tracking-wide text-white transition hover:text-[#2a45c7] xsPhone:hidden smLaptop:flex"
+            >
+              Investor Login
+            </Link>
             {/* Compact desktop toggle; hidden below 1030px where only the
                 hamburger Sheet (with its own toggle) is shown. */}
             <HighContrastToggle className="shrink-0 xsPhone:hidden smLaptop:flex" />
@@ -108,6 +124,22 @@ const NavBar = () => {
                     className="font-poppins tracking-wider transition hover:text-[#2a45c7] xsPhone:text-[min(6vw,6vh)] tablet:text-[min(3vw,3vh)]"
                   >
                     About Us
+                  </Link>
+                  <Link
+                    href="https://career.astratinvest.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-poppins tracking-wider transition hover:text-[#2a45c7] xsPhone:text-[min(6vw,6vh)] tablet:text-[min(3vw,3vh)]"
+                  >
+                    Careers
+                  </Link>
+                  <Link
+                    href="https://investor.astratinvest.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-poppins tracking-wider transition hover:text-[#2a45c7] xsPhone:text-[min(6vw,6vh)] tablet:text-[min(3vw,3vh)]"
+                  >
+                    Investor Login
                   </Link>
                   {/* Toggle inside the Sheet so it is reachable below 1030px. */}
                   <HighContrastToggle showText className="mt-4 self-start" />
