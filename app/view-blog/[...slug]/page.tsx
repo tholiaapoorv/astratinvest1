@@ -4,6 +4,7 @@ import { PortableText, PortableTextComponents } from "@portabletext/react";
 import { getImageDimensions } from "@sanity/asset-utils";
 
 import SanityImage from "@/components/ui/SanityImage";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 import axios from "axios";
 import { ChevronLeft, Loader } from "lucide-react";
@@ -183,7 +184,13 @@ const page = async ({ params }: { params: { slug: string } }) => {
         </Breadcrumb>
 
         {blog && blog.length !== 0 && (
-          <PortableText value={blog[0].body} components={components} />
+          <>
+            {blog[0].markdownBody ? (
+              <MarkdownRenderer content={blog[0].markdownBody} />
+            ) : (
+              <PortableText value={blog[0].body} components={components} />
+            )}
+          </>
         )}
       </div>
     </div>

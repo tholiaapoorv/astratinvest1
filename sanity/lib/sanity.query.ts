@@ -48,7 +48,8 @@ export async function getBlogBySlug(slug: string) {
         publishedAt,
         slug,
         _id,
-        body
+        body,
+        markdownBody
       }`,
       { slug: slug },
       { next: { tags: ["post"] }, cache: "no-cache" }

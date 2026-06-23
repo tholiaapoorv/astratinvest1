@@ -49,6 +49,12 @@ export const blogs = defineType({
       type: "array",
       of: [{ type: "block" }, { type: "image" }],
     }),
+    defineField({
+      name: "markdownBody",
+      title: "Markdown Body (LaTeX supported)",
+      type: "text",
+      rows: 30,
+    }),
   ],
 
   preview: {
