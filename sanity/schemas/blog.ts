@@ -44,6 +44,49 @@ export const blogs = defineType({
       type: "datetime",
     }),
     defineField({
+      name: "externalLinks",
+      title: "External Publication Links",
+      description:
+        "Optional links to this article on external platforms (Medium, Substack, etc.). Rendered as platform buttons at the top and bottom of the post.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "externalLink",
+          fields: [
+            defineField({
+              name: "platform",
+              title: "Platform",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Medium", value: "Medium" },
+                  { title: "Substack", value: "Substack" },
+                  { title: "LinkedIn", value: "LinkedIn" },
+                  { title: "X (Twitter)", value: "X" },
+                  { title: "Other", value: "Other" },
+                ],
+                layout: "dropdown",
+              },
+              initialValue: "Medium",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "url",
+              title: "URL",
+              type: "url",
+              description: "Full link, e.g. https://medium.com/@you/your-article",
+              validation: (Rule) =>
+                Rule.required().uri({ scheme: ["http", "https"] }),
+            }),
+          ],
+          preview: {
+            select: { title: "platform", subtitle: "url" },
+          },
+        }),
+      ],
+    }),
+    defineField({
       name: "body",
       title: "Body",
       type: "array",
