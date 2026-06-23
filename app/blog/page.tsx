@@ -19,8 +19,8 @@ const Page = () => {
   }, []);
 
   return (
-    <main id="main-content">
-      <div className="grid h-full w-[90%] items-start justify-start text-[#000121] phone:grid-cols-1 phone:gap-[2rem] tablet:grid-cols-2 tablet:gap-[2rem] smLaptop:gap-[2rem]">
+    <main id="main-content" className="w-full">
+      <div className="mx-auto grid w-full max-w-[1400px] gap-6 px-2 text-[#000121] phone:grid-cols-1 smTablet:grid-cols-2 smLaptop:grid-cols-3 laptop:grid-cols-4">
         {blogs &&
           blogs.length !== 0 &&
           blogs.map((blog, idx) => {
@@ -28,7 +28,7 @@ const Page = () => {
             <Link
               href={`${process.env.NEXT_PUBLIC_APP_URL}/view-blog/${blog.slug.current}`}
               key={idx}
-              className="flex h-full items-start justify-start rounded-[2rem] p-4 transition hover:scale-105"
+              className="flex h-full rounded-2xl p-2 transition hover:scale-[1.03]"
             >
               <BlogCard
                 title={blog.title}

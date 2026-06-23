@@ -15,8 +15,8 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <div className="relative mb-12 overflow-x-clip">
         <NavBar />
         <BlogLayout />
-        <div className="mt-12 flex w-full items-center justify-center">
-          <div className="flex h-full w-[95%] flex-col items-center justify-center rounded-[2rem] bg-[#ECF0FB] phone:gap-[2rem] phone:py-[2.5rem] smLaptop:gap-[4.5rem] smLaptop:py-[5rem]">
+        <div className="mt-4 flex w-full items-center justify-center">
+          <div className="flex h-full w-[95%] flex-col items-center justify-center rounded-[2rem] bg-[#ECF0FB] phone:gap-[2rem] phone:px-[1.25rem] phone:py-[2.5rem] smLaptop:gap-[4.5rem] smLaptop:px-[3.5rem] smLaptop:py-[5rem]">
             <Suspense
               fallback={
                 <div className="flex h-full w-full items-center justify-center">

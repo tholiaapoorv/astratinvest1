@@ -5,6 +5,7 @@ import { getImageDimensions } from "@sanity/asset-utils";
 
 import SanityImage from "@/components/ui/SanityImage";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import PublicationLinks from "@/components/ui/PublicationLinks";
 
 import axios from "axios";
 import { ChevronLeft, Loader } from "lucide-react";
@@ -185,6 +186,10 @@ const page = async ({ params }: { params: { slug: string } }) => {
 
         {blog && blog.length !== 0 && (
           <>
+            <PublicationLinks
+              links={blog[0].externalLinks}
+              className="mb-10"
+            />
             {blog[0].markdownBody ? (
               <MarkdownRenderer
                 content={blog[0].markdownBody}
@@ -193,6 +198,10 @@ const page = async ({ params }: { params: { slug: string } }) => {
             ) : (
               <PortableText value={blog[0].body} components={components} />
             )}
+            <PublicationLinks
+              links={blog[0].externalLinks}
+              className="mt-12"
+            />
           </>
         )}
       </div>

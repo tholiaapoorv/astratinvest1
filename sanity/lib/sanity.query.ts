@@ -21,7 +21,7 @@ export async function getTestimonials(): Promise<testimonial[] | undefined> {
 export async function getBlogs() {
   try {
     const blog = await client.fetch(
-      groq`*[_type=="post"]{
+      groq`*[_type=="post"] | order(publishedAt desc){
         title,
         mainImage,
         description,
@@ -50,6 +50,10 @@ export async function getBlogBySlug(slug: string) {
         _id,
         body,
         markdownBody,
+        externalLinks[]{
+          platform,
+          url
+        },
         "bodyImages": bodyImages[]{
           name,
           alt,
