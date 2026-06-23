@@ -112,6 +112,9 @@ export default function Globe({
           "h-full w-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]",
         )}
         ref={canvasRef}
+        role="img"
+        aria-label="Interactive globe showing global market reach"
+        tabIndex={0}
         onPointerDown={(e) =>
           updatePointerInteraction(
             e.clientX - pointerInteractionMovement.current,

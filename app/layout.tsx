@@ -4,6 +4,7 @@ import "./globals.css";
 import localFonts from "next/font/local";
 import { Toaster } from "sonner";
 import Script from "next/script";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       {/* GTM Script in <head> */}
       <head>
         <Script
@@ -48,6 +49,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
 
       <body className={`${inter.className} ${ivy.variable} ${ivy_thin.variable}`}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[9999] focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-black focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-[#3959E5]"
+        >
+          Skip to main content
+        </a>
         {/* GTM NoScript fallback */}
         <noscript>
           <iframe
@@ -59,8 +66,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           ></iframe>
         </noscript>
 
-        {children}
-        <Toaster closeButton richColors />
+        <ThemeProvider
+          attribute="data-theme"
+          themes={["light", "high-contrast"]}
+          defaultTheme="light"
+          enableSystem={false}
+          disableTransitionOnChange
+        >
+          {children}
+          <Toaster closeButton richColors />
+        </ThemeProvider>
       </body>
     </html>
   );

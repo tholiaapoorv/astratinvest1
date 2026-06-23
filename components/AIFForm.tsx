@@ -127,7 +127,7 @@ const AIFForm = () => {
           </h2>
           <p className="mb-8 text-center font-poppins text-white/60 phone:text-[min(3.5vw,3.5vh)] sm:text-[min(2.5vw,2.5vh)] smLaptop:mb-12">
             Share your details and our team will get in touch within{" "}
-            <span className="text-[#3959E6]">3 working days</span>.
+            <span className="text-[#4d73f7]">3 working days</span>.
           </p>
 
           <form onSubmit={onSubmit} className="w-full space-y-6 font-poppins">
@@ -266,6 +266,7 @@ function Select<T extends readonly string[]>({
           required={required}
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          aria-label={label}
           className="w-full appearance-none p-4 rounded-md bg-[#1a1a2f] text-white border border-white/20 focus:outline-none"
         >
           <option value="">{placeholder ?? "Select an option"}</option>

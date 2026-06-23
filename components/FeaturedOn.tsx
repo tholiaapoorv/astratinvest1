@@ -74,16 +74,13 @@ export default function FeaturedOn({
         >
           {logos.map((logo) => {
             const content = (
-              <>
-                <Image
-                  src={logo.src}
-                  alt={logo.name}
-                  width={logo.width ?? 300}
-                  height={logo.height ?? 90}
-                  className="h-12 sm:h-14 md:h-18 w-auto object-contain"
-                />
-                <span className="sr-only">{logo.name}</span>
-              </>
+              <Image
+                src={logo.src}
+                alt={logo.name}
+                width={logo.width ?? 300}
+                height={logo.height ?? 90}
+                className="h-12 sm:h-14 md:h-18 w-auto object-contain"
+              />
             );
 
             return (
@@ -94,12 +91,11 @@ export default function FeaturedOn({
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gray-800 p-2"
-                    aria-label={logo.name}
                   >
                     {content}
                   </a>
                 ) : (
-                  <div aria-label={logo.name} className="p-2">
+                  <div className="p-2">
                     {content}
                   </div>
                 )}

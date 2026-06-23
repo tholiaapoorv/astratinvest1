@@ -105,16 +105,22 @@ export default function Home() {
         }}
       >
         <NavBar />
-        <Banner />
-        <Hero />
-        <Tagline />
-        <HomePageStats />
-        <SplineScene />
-        <JimSimons />
-        <FeaturedOn className="bg-gray-50"/>
-        <Testimonials />
-        <Blogs />
-        <AIFForm />
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="flex w-full flex-col items-center justify-center focus:outline-none"
+        >
+          <Banner />
+          <Hero />
+          <Tagline />
+          <HomePageStats />
+          <SplineScene />
+          <JimSimons />
+          <FeaturedOn className="bg-gray-50"/>
+          <Testimonials />
+          <Blogs />
+          <AIFForm />
+        </main>
         <Footer />
       </div>
     </div>

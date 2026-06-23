@@ -6,7 +6,7 @@ import Rating from "@mui/material/Rating";
 import Skeleton from "@mui/material/Skeleton";
 import React, { useEffect, useState } from "react";
 import SanityImage from "./SanityImage";
-import { User2Icon } from "lucide-react";
+import { User2Icon, Pause, Play } from "lucide-react";
 
 export const InfiniteMovingCards = ({
   items,
@@ -29,6 +29,19 @@ export const InfiniteMovingCards = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const [start, setStart] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReducedMotion(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  const isPaused = paused || reducedMotion;
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
       const scrollerContent = Array.from(scrollerRef.current.children);
@@ -85,6 +98,8 @@ export const InfiniteMovingCards = ({
           "flex w-max min-w-fit shrink-0 flex-nowrap gap-4 py-4",
           start && "animate-scroll",
           pauseOnHover && "hover:[animation-play-state:paused]",
+          "focus-within:[animation-play-state:paused]",
+          isPaused && "[animation-play-state:paused]",
         )}
       >
         {items.map((item, idx) => (
@@ -97,6 +112,15 @@ export const InfiniteMovingCards = ({
           </Card>
         ))}
       </ul>
+      <button
+        type="button"
+        onClick={() => setPaused((p) => !p)}
+        aria-label={isPaused ? "Resume testimonials carousel" : "Pause testimonials carousel"}
+        aria-pressed={isPaused}
+        className="absolute right-4 top-4 z-30 flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-md transition hover:bg-white/25 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#000121]"
+      >
+        {isPaused ? <Play className="h-4 w-4" aria-hidden="true" /> : <Pause className="h-4 w-4" aria-hidden="true" />}
+      </button>
     </div>
   );
 };

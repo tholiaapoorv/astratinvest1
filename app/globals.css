@@ -166,6 +166,90 @@ body {
   border:0; 
 }
 
+/* =====================================================================
+   High Contrast Mode (GIGW 3.0 6.5.2)
+   Activated by next-themes setting data-theme="high-contrast" on <html>.
+   Because visible colours across the site are hardcoded Tailwind utility
+   hexes (bg-[#000121], text-white, text-[#3959E6], ...) rather than CSS
+   design tokens, the only reliable way to force a true high-contrast scheme
+   is broad, well-scoped overrides with !important. Selectors are scoped to
+   the data-theme attribute so the default ("light") theme is untouched.
+   Contrast: white-on-black 21:1, yellow-on-black 19.6:1 (all >= 4.5:1).
+   ===================================================================== */
+[data-theme="high-contrast"],
+[data-theme="high-contrast"] body {
+  background-color: #000000 !important;
+}
+
+/* Near-black backgrounds + crisp white text everywhere. This also flips the
+   portaled Radix Sheet overlay/content (descendants of <html>) in one pass,
+   so we do not separately re-clobber their bg-[#000121]/70 / text-white. */
+[data-theme="high-contrast"] *,
+[data-theme="high-contrast"] *::before,
+[data-theme="high-contrast"] *::after {
+  background-color: #000000 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+}
+
+/* Keep raster/inline media visible (logos etc.) rather than boxing them. */
+[data-theme="high-contrast"] img,
+[data-theme="high-contrast"] svg image {
+  background-color: transparent !important;
+}
+
+/* Links: distinct yellow + underline. */
+[data-theme="high-contrast"] a,
+[data-theme="high-contrast"] a *,
+[data-theme="high-contrast"] a:visited,
+[data-theme="high-contrast"] a:visited * {
+  color: #ffff00 !important;
+  text-decoration: underline !important;
+}
+[data-theme="high-contrast"] a:hover,
+[data-theme="high-contrast"] a:hover *,
+[data-theme="high-contrast"] a:focus,
+[data-theme="high-contrast"] a:focus * {
+  color: #ffffff !important;
+}
+
+/* Buttons / interactive controls read as actionable via yellow text. */
+[data-theme="high-contrast"] button,
+[data-theme="high-contrast"] button *,
+[data-theme="high-contrast"] [role="button"],
+[data-theme="high-contrast"] [role="button"] * {
+  color: #ffff00 !important;
+}
+
+/* Distinguish the Sheet panel from the now-solid-black overlay scrim. */
+[data-theme="high-contrast"] [role="dialog"] {
+  border: 2px solid #ffffff !important;
+}
+
+/* Readable placeholders (#cccccc on #000 ~= 13:1). */
+[data-theme="high-contrast"] ::placeholder {
+  color: #cccccc !important;
+  opacity: 1 !important;
+}
+
+/* Always-visible keyboard focus indicator. */
+[data-theme="high-contrast"] :focus-visible {
+  outline: 3px solid #ffff00 !important;
+  outline-offset: 2px !important;
+}
+
+/* Center block/display math produced by $$ ... $$ (rehype-katex) */
+.katex-display {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {

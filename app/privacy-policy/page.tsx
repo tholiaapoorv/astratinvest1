@@ -7,7 +7,7 @@ const PrivacyPolicyPage = () => {
     <div>
       <NavBar />
 
-      <main className="flex flex-col items-center justify-center w-full overflow-hidden px-6 pt-28 pb-16 bg-white text-[#000121]">
+      <main id="main-content" className="flex flex-col items-center justify-center w-full overflow-hidden px-6 pt-28 pb-16 bg-white text-[#000121]">
         {/* Heading */}
         <section className="text-center mb-8">
           <h1 className="font-ivy text-[min(6vw,6vh)] font-bold text-[#000121]">
