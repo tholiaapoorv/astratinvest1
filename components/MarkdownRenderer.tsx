@@ -7,7 +7,35 @@ import rehypeKatex from "rehype-katex";
 import "katex/dist/katex.min.css";
 import Link from "next/link";
 
-export default function MarkdownRenderer({ content }: { content: string }) {
+type BodyImage = { name?: string; alt?: string; url?: string };
+
+/**
+ * remark-math only renders `$$...$$` as centered *display* math when the `$$`
+ * delimiters sit on their own lines. Written inline (`$$E=mc^2$$` on a single
+ * line) it parses as *inline* math, which is left-aligned. To make standalone
+ * formulas "just work", expand any line that is ONLY `$$...$$` into the fenced
+ * block form. Genuine inline `$$` inside a sentence is left untouched.
+ */
+function expandDisplayMath(src: string): string {
+  return src.replace(
+    /^[ \t]*\$\$((?:(?!\$\$)[^\n])+?)\$\$[ \t]*$/gm,
+    (_match, body) => `$$\n${body.trim()}\n$$`,
+  );
+}
+
+export default function MarkdownRenderer({
+  content,
+  images = [],
+}: {
+  content: string;
+  images?: BodyImage[];
+}) {
+  // Map a Markdown image's reference name (![alt](name)) to its uploaded asset.
+  const imageMap = new Map<string, BodyImage>();
+  for (const img of images) {
+    if (img?.name) imageMap.set(img.name, img);
+  }
+
   return (
     <ReactMarkdown
       remarkPlugins={[remarkGfm, remarkMath]}
@@ -70,22 +98,31 @@ export default function MarkdownRenderer({ content }: { content: string }) {
           </Link>
         ),
         // eslint-disable-next-line @next/next/no-img-element
-        img: ({ src, alt }) => (
-          // Mirrors the PortableText image styling: centered, responsive.
-          // A span (inline) is used because markdown wraps images in <p>,
-          // and a block-level <div> there would be invalid HTML.
-          <span className="flex w-full items-center justify-center">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={typeof src === "string" ? src : ""}
-              alt={alt ?? ""}
-              className="h-auto object-contain phone:w-[80%] tablet:w-[50%]"
-            />
-          </span>
-        ),
+        img: ({ src, alt }) => {
+          // If the src matches a Studio-uploaded image's reference name,
+          // swap in its CDN URL; otherwise fall back to the raw src (so plain
+          // external image URLs keep working).
+          const key = typeof src === "string" ? src : "";
+          const resolved = imageMap.get(key);
+          const finalSrc = resolved?.url ?? key;
+          const finalAlt = alt ?? resolved?.alt ?? "";
+          return (
+            // Mirrors the PortableText image styling: centered, responsive.
+            // A span (inline) is used because markdown wraps images in <p>,
+            // and a block-level <div> there would be invalid HTML.
+            <span className="flex w-full items-center justify-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={finalSrc}
+                alt={finalAlt}
+                className="h-auto object-contain phone:w-[80%] tablet:w-[50%]"
+              />
+            </span>
+          );
+        },
       }}
     >
-      {content}
+      {expandDisplayMath(content)}
     </ReactMarkdown>
   );
 }

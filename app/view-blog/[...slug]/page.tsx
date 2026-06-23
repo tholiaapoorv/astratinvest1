@@ -186,7 +186,10 @@ const page = async ({ params }: { params: { slug: string } }) => {
         {blog && blog.length !== 0 && (
           <>
             {blog[0].markdownBody ? (
-              <MarkdownRenderer content={blog[0].markdownBody} />
+              <MarkdownRenderer
+                content={blog[0].markdownBody}
+                images={blog[0].bodyImages || []}
+              />
             ) : (
               <PortableText value={blog[0].body} components={components} />
             )}

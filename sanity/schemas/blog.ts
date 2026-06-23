@@ -1,4 +1,4 @@
-import { defineField, defineType } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
 export const blogs = defineType({
   name: "post",
@@ -54,6 +54,51 @@ export const blogs = defineType({
       title: "Markdown Body (LaTeX supported)",
       type: "text",
       rows: 30,
+    }),
+    defineField({
+      name: "bodyImages",
+      title: "Body Images (for Markdown)",
+      description:
+        "Upload images here and give each a short Reference name. Then place it anywhere in the Markdown Body with ![alt text](name) — e.g. ![Performance chart](chart1).",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "image",
+          name: "bodyImage",
+          options: { hotspot: true },
+          fields: [
+            defineField({
+              name: "name",
+              title: "Reference name",
+              type: "string",
+              description:
+                "Use this exact name in the Markdown Body: ![alt](name). Keep it short, no spaces — e.g. chart1.",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "alt",
+              title: "Alt text",
+              type: "string",
+              description:
+                "Used if the Markdown link omits alt text. Important for accessibility.",
+            }),
+          ],
+          preview: {
+            select: { title: "name", media: "asset" },
+            prepare(selection) {
+              const { title, media } = selection as {
+                title?: string;
+                media?: unknown;
+              };
+              return {
+                title: title || "⚠ Set a Reference name",
+                subtitle: title ? `Markdown: ![alt](${title})` : undefined,
+                media: media as never,
+              };
+            },
+          },
+        }),
+      ],
     }),
   ],
 

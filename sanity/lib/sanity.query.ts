@@ -49,7 +49,12 @@ export async function getBlogBySlug(slug: string) {
         slug,
         _id,
         body,
-        markdownBody
+        markdownBody,
+        "bodyImages": bodyImages[]{
+          name,
+          alt,
+          "url": asset->url
+        }
       }`,
       { slug: slug },
       { next: { tags: ["post"] }, cache: "no-cache" }
