@@ -18,23 +18,39 @@ const BlogCard = ({
   slug: string;
 }) => {
   return (
-    <div className="mx-auto flex h-full items-start justify-center gap-12">
-      <div className="flex h-full flex-col items-start justify-between gap-5">
-        <SanityImage src={imageSrc} className="h-auto w-fit rounded-3xl" alt={title} />
-        <div className="flex w-full justify-between font-poppins font-extralight phone:text-[min(3vh,3vw)] smTablet:text-[min(1.6vh,1.6vw)]">
-          <p className=" ">Author: Astratinvest </p> &nbsp; &nbsp; &nbsp;
-          <p className=" ">{new Date(date).toUTCString()}</p>
+    <div className="flex h-full w-full flex-col">
+      <div className="flex h-full w-full flex-col items-start justify-start gap-2.5">
+        <SanityImage
+          src={imageSrc}
+          className="rounded-2xl"
+          // SanityImage forces height:auto inline, so the fixed crop height is
+          // set via style (inline wins) to keep every card's image uniform.
+          style={{ width: "100%", height: "10rem", objectFit: "cover" }}
+          alt={title}
+        />
+        <div className="flex w-full items-center justify-between gap-2 font-poppins text-[0.7rem] font-extralight">
+          <p>Astratinvest</p>
+          <p>
+            {new Date(date).toLocaleDateString("en-US", {
+              day: "numeric",
+              month: "short",
+              year: "numeric",
+            })}
+          </p>
         </div>
-        <p className="font-poppins font-semibold tracking-wide phone:text-[min(4.5vh,4.5vw)] smTablet:text-[min(2.8vw,2.8vh)] smLaptop:text-[min(2.5vh,2.5vw)]">
+        <p className="line-clamp-2 font-poppins text-base font-semibold leading-snug tracking-wide">
           {title}
         </p>
-        <p className="line-clamp-2 font-poppins font-extralight phone:text-[min(3vh,3vw)] smTablet:text-[min(1.8vw,1.8vh)]">
+        <p className="line-clamp-2 font-poppins text-sm font-extralight text-[#000121]/80">
           {description}
         </p>
-        <div className="w-full">
+        <div className="mt-auto w-full pt-1">
           <Link href={`${process.env.NEXT_PUBLIC_APP_URL}/view-blog/${slug}`}>
-            <button className="flex w-full cursor-pointer items-center justify-center gap-1 border border-[#000121] p-3 font-ivy tracking-wide text-[#000121] transition hover:bg-[#000121] hover:text-white xsPhone:text-[min(3.5vw,3.5vh)] smTablet:text-[min(1.8vw,1.8vh)]" aria-label={`Learn more about ${title}`}>
-              Learn More <TbArrowUpRight className="h-auto phone:w-5" aria-hidden="true" />
+            <button
+              className="flex w-full cursor-pointer items-center justify-center gap-1 rounded-md border border-[#000121] p-2 font-ivy text-sm tracking-wide text-[#000121] transition hover:bg-[#000121] hover:text-white"
+              aria-label={`Learn more about ${title}`}
+            >
+              Learn More <TbArrowUpRight className="h-auto w-4" aria-hidden="true" />
             </button>
           </Link>
         </div>
