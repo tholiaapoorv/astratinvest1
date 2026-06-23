@@ -241,6 +241,15 @@ body {
   outline-offset: 2px !important;
 }
 
+/* Center block/display math produced by $$ ... $$ (rehype-katex) */
+.katex-display {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
 @layer utilities {
   /* Hide scrollbar for Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {

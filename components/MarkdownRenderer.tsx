@@ -71,12 +71,17 @@ export default function MarkdownRenderer({ content }: { content: string }) {
         ),
         // eslint-disable-next-line @next/next/no-img-element
         img: ({ src, alt }) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={typeof src === "string" ? src : ""}
-            alt={alt ?? ""}
-            className="mx-auto h-auto w-[80%]"
-          />
+          // Mirrors the PortableText image styling: centered, responsive.
+          // A span (inline) is used because markdown wraps images in <p>,
+          // and a block-level <div> there would be invalid HTML.
+          <span className="flex w-full items-center justify-center">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={typeof src === "string" ? src : ""}
+              alt={alt ?? ""}
+              className="h-auto object-contain phone:w-[80%] tablet:w-[50%]"
+            />
+          </span>
         ),
       }}
     >
