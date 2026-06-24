@@ -1,4 +1,5 @@
 import React from "react";
+import type { Metadata } from "next";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
 
 import { getImageDimensions } from "@sanity/asset-utils";
@@ -6,6 +7,8 @@ import { getImageDimensions } from "@sanity/asset-utils";
 import SanityImage from "@/components/ui/SanityImage";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import PublicationLinks from "@/components/ui/PublicationLinks";
+import { getBlogBySlug } from "@/sanity/lib/sanity.query";
+import { urlForOgImage } from "@/sanity/lib/image";
 
 import axios from "axios";
 import { ChevronLeft, Loader } from "lucide-react";
@@ -19,6 +22,39 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const slug = params.slug?.[0];
+  const post = slug ? (await getBlogBySlug(slug))?.[0] : null;
+  if (!post) {
+    return { title: "Blog" };
+  }
+  const ogImage = post.mainImage ? urlForOgImage(post.mainImage) : undefined;
+  const canonical = `/view-blog/${slug}`;
+  return {
+    title: post.title,
+    description: post.description,
+    alternates: { canonical },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.description,
+      url: canonical,
+      publishedTime: post.publishedAt,
+      images: ogImage ? [{ url: ogImage, width: 1200, height: 630 }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description,
+      images: ogImage ? [ogImage] : undefined,
+    },
+  };
+}
 
 const page = async ({ params }: { params: { slug: string } }) => {
   if (!params.slug) {
