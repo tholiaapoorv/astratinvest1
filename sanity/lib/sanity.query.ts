@@ -25,6 +25,7 @@ export async function getBlogs() {
         title,
         mainImage,
         description,
+        author,
         publishedAt,
         slug,
         _id
@@ -45,6 +46,7 @@ export async function getBlogBySlug(slug: string) {
         title,
         mainImage,
         description,
+        author,
         publishedAt,
         slug,
         _id,

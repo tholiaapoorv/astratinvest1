@@ -12,6 +12,7 @@ export type blogs = {
   title: string;
   mainImage: SanityImageSource;
   description: string;
+  author?: string;
   publishedAt: string;
   slug: { current: string };
   _id: string;

@@ -10,12 +10,14 @@ const BlogCard = ({
   description,
   date,
   slug,
+  author,
 }: {
   imageSrc: SanityImageSource;
   title: string;
   description: string;
   date: string;
   slug: string;
+  author?: string;
 }) => {
   return (
     <div className="flex h-full w-full flex-col">
@@ -29,7 +31,7 @@ const BlogCard = ({
           alt={title}
         />
         <div className="flex w-full items-center justify-between gap-2 font-poppins text-[0.7rem] font-extralight">
-          <p>Astratinvest</p>
+          <p>{author || "Astratinvest"}</p>
           <p>
             {new Date(date).toLocaleDateString("en-US", {
               day: "numeric",
