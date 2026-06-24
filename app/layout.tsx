@@ -4,7 +4,18 @@ import "./globals.css";
 import localFonts from "next/font/local";
 import { Toaster } from "sonner";
 import Script from "next/script";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
+
+// Canonical production origin. Falls back to the dev URL so metadataBase is
+// always a valid absolute URL even before NEXT_PUBLIC_SITE_URL is set.
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  process.env.NEXT_PUBLIC_APP_URL ||
+  "http://localhost:3000";
+
+const siteDescription =
+  "Astratinvest aims for superior risk-adjusted returns through a scientific and mathematical investment model. We conduct quantitative research with rigorous backtesting utilizing high-quality data to identify potential outperformers.";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,12 +31,26 @@ const ivy_thin = localFonts({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Astratinvest",
     template: "%s | Astratinvest",
   },
-  description:
-    "Astratinvest aims for superior risk-adjusted returns through a scientific and mathematical investment model. We conduct quantitative research with rigorous backtesting utilizing high-quality data to identify potential outperformers.",
+  description: siteDescription,
+  openGraph: {
+    type: "website",
+    siteName: "Astratinvest",
+    title: "Astratinvest",
+    description: siteDescription,
+    url: siteUrl,
+    images: [{ url: "/og-default.png", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Astratinvest",
+    description: siteDescription,
+    images: ["/og-default.png"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -76,6 +101,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <Toaster closeButton richColors />
         </ThemeProvider>
+        {/* GA4 — only loads when a Measurement ID is configured. Handles
+            single-page-app route-change pageviews automatically. */}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
       </body>
     </html>
   );
