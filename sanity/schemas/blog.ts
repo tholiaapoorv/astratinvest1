@@ -25,6 +25,13 @@ export const blogs = defineType({
       type: "string",
     }),
     defineField({
+      name: "author",
+      title: "Author",
+      type: "string",
+      description: "Shown as the author on the blog card and post.",
+      initialValue: "Astratinvest",
+    }),
+    defineField({
       name: "mainImage",
       title: "Main image",
       type: "image",
@@ -148,7 +155,7 @@ export const blogs = defineType({
   preview: {
     select: {
       title: "title",
-      author: "author.name",
+      author: "author",
       media: "mainImage",
     },
     prepare(selection) {

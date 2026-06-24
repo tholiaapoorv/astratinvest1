@@ -36,6 +36,7 @@ const Page = () => {
                 description={blog.description}
                 imageSrc={blog.mainImage}
                 slug={blog.slug.current}
+                author={blog.author}
               />
             </Link>
           );
