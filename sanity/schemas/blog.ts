@@ -39,6 +39,16 @@ export const blogs = defineType({
         hotspot: true,
       },
     }),
+    defineField({
+      name: "shareImage",
+      title: "Social share image (link preview)",
+      description:
+        "Optional. The image shown when this post's link is shared on WhatsApp, LinkedIn, X, Slack, etc. Leave empty to reuse the Main image. Ideal ratio is 1.91:1 — upload at least 1200x630; it is cropped to that size.",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+    }),
     // defineField({
     //   name: "categories",
     //   title: "Categories",

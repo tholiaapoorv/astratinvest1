@@ -45,6 +45,7 @@ export async function getBlogBySlug(slug: string) {
       groq`*[_type=="post" && slug.current == $slug]{
         title,
         mainImage,
+        shareImage,
         description,
         author,
         publishedAt,

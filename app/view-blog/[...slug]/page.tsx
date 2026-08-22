@@ -33,7 +33,10 @@ export async function generateMetadata({
   if (!post) {
     return { title: "Blog" };
   }
-  const ogImage = post.mainImage ? urlForOgImage(post.mainImage) : undefined;
+  // The link-preview card uses the dedicated share image when the author set
+  // one, and otherwise falls back to the hero image.
+  const ogSource = post.shareImage || post.mainImage;
+  const ogImage = ogSource ? urlForOgImage(ogSource) : undefined;
   const canonical = `/view-blog/${slug}`;
   return {
     title: post.title,
