@@ -2,8 +2,77 @@ import React from "react";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 
+/* ------------------------------------------------------------------
+   INVESTOR COMPLAINTS DATA
+   ------------------------------------------------------------------
+   Months are generated automatically from START_MONTH up to the last
+   fully completed month — you never need to add month rows by hand.
+
+   Every month defaults to zero complaints. If a month has actual
+   complaints, add an entry below using the "YYYY-MM" key, e.g.:
+
+     "2026-09": { received: 2, resolved: 1, avgDays: 4 },
+
+   "Carried forward" and "Pending" are calculated automatically.
+------------------------------------------------------------------- */
+const START_MONTH = { year: 2025, month: 6 }; // June 2025
+
+const COMPLAINT_DATA = {
+  // "2026-09": { received: 0, resolved: 0, avgDays: null },
+};
+
+const MONTH_NAMES = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+
+function buildComplaintRows() {
+  const now = new Date();
+  // Last completed month (the current month is not shown until it ends)
+  let endYear = now.getFullYear();
+  let endMonth = now.getMonth(); // 0-based current month = 1-based previous month
+  if (endMonth === 0) {
+    endMonth = 12;
+    endYear -= 1;
+  }
+
+  const rows = [];
+  let carriedForward = 0;
+  let year = START_MONTH.year;
+  let month = START_MONTH.month;
+
+  while (year < endYear || (year === endYear && month <= endMonth)) {
+    const key = `${year}-${String(month).padStart(2, "0")}`;
+    const data = COMPLAINT_DATA[key] || {};
+    const received = data.received ?? 0;
+    const resolved = data.resolved ?? 0;
+    const pending = carriedForward + received - resolved;
+
+    rows.push({
+      key,
+      label: `${MONTH_NAMES[month - 1]} ${year}`,
+      carriedForward,
+      received,
+      resolved,
+      pending,
+      avgDays: data.avgDays ?? null,
+    });
+
+    carriedForward = pending;
+    month += 1;
+    if (month > 12) {
+      month = 1;
+      year += 1;
+    }
+  }
+
+  // Newest month first; remove .reverse() for oldest first
+  return rows.reverse();
+}
 
 const InvestorRelationsPage = () => {
+  const complaintRows = buildComplaintRows();
+
   return (
     <div>
       <NavBar />
@@ -90,29 +159,17 @@ const InvestorRelationsPage = () => {
                 </tr>
               </thead>
               <tbody>
-  {[
-  { month: "May 2025" },
-  { month: "June 2025" },
-  { month: "July 2025" },
-  { month: "August 2025" },
-  { month: "September 2025" },
-  { month: "October 2025" },
-  { month: "November 2025" },
-  { month: "December 2025" },
-  { month: "January 2026" },
-  { month: "February 2026" },
-].map(({ month }) => (
-  <tr key={month}>
-    <td className="px-4 py-2 border">{month}</td>
-    <td className="px-4 py-2 border">0</td>
-    <td className="px-4 py-2 border">0</td>
-    <td className="px-4 py-2 border">0</td>
-    <td className="px-4 py-2 border">0</td>
-    <td className="px-4 py-2 border">–</td>
-  </tr>
-))}
-
-</tbody>
+                {complaintRows.map((row) => (
+                  <tr key={row.key}>
+                    <td className="px-4 py-2 border">{row.label}</td>
+                    <td className="px-4 py-2 border">{row.carriedForward}</td>
+                    <td className="px-4 py-2 border">{row.received}</td>
+                    <td className="px-4 py-2 border">{row.resolved}</td>
+                    <td className="px-4 py-2 border">{row.pending}</td>
+                    <td className="px-4 py-2 border">{row.avgDays ?? "–"}</td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
         </section>
@@ -123,4 +180,4 @@ const InvestorRelationsPage = () => {
   );
 };
 
-export default InvestorRelationsPage; 
+export default InvestorRelationsPage;
