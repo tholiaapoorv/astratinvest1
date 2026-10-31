@@ -17,7 +17,13 @@ import Footer from "@/components/Footer";
 ------------------------------------------------------------------- */
 const START_MONTH = { year: 2025, month: 6 }; // June 2025
 
-const COMPLAINT_DATA = {
+type ComplaintMonth = {
+  received?: number;
+  resolved?: number;
+  avgDays?: number | null;
+};
+
+const COMPLAINT_DATA: Record<string, ComplaintMonth> = {
   // "2026-09": { received: 0, resolved: 0, avgDays: null },
 };
 
