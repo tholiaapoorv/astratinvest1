@@ -95,7 +95,7 @@ const InvestorRelationsPage = () => {
           <p>Category III – AIF</p>
           <p>Registered Office – 414, E-square, Subhash Road, Vile Parle (East) - 400057</p>
           <p>Investment Manager – Astratinvest Financial Advisors Private Limited</p>
-          <p>Registered Office – 414, E-square, Subhash Road, Vile Parle (East) - 400057</p>
+          <p>Registered Office – 201, VKG Corporate Center, Ajit Nagar, Andheri (East), Mumbai - 400059</p>
 
           <p>Dear Investors,</p>
           <p>
