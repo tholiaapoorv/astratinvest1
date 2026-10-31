@@ -188,8 +188,8 @@ const WhyUs = () => {
               you.
             </p>
             <p className="flex gap-2 font-extralight text-[#000121]/70 xsPhone:text-[min(3vh,3vw)] tablet:text-[min(2vh,2vw)]">
-              <MapPinIcon /> 414, E-Square, Subhash Road, Vile Parle (East),
-              Mumbai - 400057
+              <MapPinIcon /> 201, VKG Corporate Center, Ajit Nagar, Andheri
+              (East), Mumbai - 400059
             </p>
             <p className="flex gap-2 font-extralight text-[#000121]/70 xsPhone:text-[min(3vh,3vw)] tablet:text-[min(2vh,2vw)]">
               <MapPinIcon /> 301-302, Prakash deep complex, Station Road, Jaipur
